@@ -90,6 +90,12 @@ class Console_Table
     * @var array
     */
     var $_filters;
+    
+    /**
+    * Columns to calculate totals for
+    * @var array
+    */
+    var $_calculateTotals;
 
     /**
     * Constructor
@@ -143,6 +149,17 @@ class Console_Table
         $this->_filters[] = array($col, &$callback);
     }
     
+    /**
+    * Specifies which columns are to have totals calculated for them and
+    * added as a new row at the bottom.
+    * 
+    * @param array $cols Array of column IDs (0 is first column, 1 is second etc)
+    */
+    function calculateTotalsFor($cols)
+    {
+        $this->_calculateTotals = $cols;
+    }
+
     /**
     * Sets the headers for the columns
     *
@@ -236,8 +253,34 @@ class Console_Table
     function getTable()
     {
         $this->_applyFilters();
+        $this->_calculateTotals();
         $this->_validateTable();
+
         return $this->_buildTable();
+    }
+    
+    /**
+    * Calculates totals for columns
+    */
+    function _calculateTotals()
+    {
+        if (!empty($this->_calculateTotals)) {
+            
+            $this->addSeparator();
+
+            $totals = array();
+
+            foreach ($this->_data as $row) {
+                if (is_array($row)) {
+                    foreach ($this->_calculateTotals as $columnID) {
+                        $totals[$columnID] += $row[$columnID];
+                    }
+                }
+            }
+            
+            $this->_data[] = $totals;
+            $this->_updateRowsCols();
+        }
     }
 
     /**
