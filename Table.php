@@ -241,12 +241,6 @@ class Console_Table
     */
 	function _getSeparator()
 	{
-		static $return = '';
-		
-		if (!empty($return)) {
-			return $return;
-		}
-
 		foreach ($this->_cell_lengths as $cl) {
 			$return[] = str_repeat('-', $cl);
 		}
