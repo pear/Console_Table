@@ -84,6 +84,12 @@ class Console_Table
     * @var integer
     */
     var $_padding;
+    
+    /**
+    * Column filters
+    * @var array
+    */
+    var $_filters;
 
     /**
     * Constructor
@@ -96,6 +102,7 @@ class Console_Table
         $this->_max_cols     = 0;
         $this->_max_rows     = 0;
         $this->_padding      = 1;
+        $this->_filters      = array();
     }
     
     /**
@@ -120,6 +127,20 @@ class Console_Table
         }
 
         return $returnObject ? $table : $table->getTable();
+    }
+    
+    /**
+    * Adds a filter to the object. Filters are standard php callbacks which are
+    * run on the data before table generation is performed. Filters are applied
+    * in the order they're added. the callback function must accept a single
+    * argument, which is a single table cell.
+    * 
+    * @param int      $col      Column to apply filter to
+    * @param callback $callback PHP callback to apply
+    */
+    function addFilter($col, &$callback)
+    {
+        $this->_filters[] = array($col, &$callback);
     }
     
     /**
@@ -214,8 +235,26 @@ class Console_Table
     */
     function getTable()
     {
+        $this->_applyFilters();
         $this->_validateTable();
         return $this->_buildTable();
+    }
+
+    /**
+    * Applies any column filters to the data
+    */
+    function _applyFilters()
+    {
+        if (!empty($this->_filters)) {
+            foreach ($this->_filters as $filter) {
+                $column   = $filter[0];
+                $callback = $filter[1];
+
+                foreach ($this->_data as $row_id => $row_data) {
+                    $this->_data[$row_id][$column] = call_user_func($callback, $row_data[$column]);
+                }
+            }
+        }
     }
 
     /**
