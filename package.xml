@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- do not use the "Type" attribute here, that one is only for
+     generated package.xml files -->
+<package version="1.0">
+
+  <name>Console_Table</name>
+  <summary>Class that makes it easy to build console style tables</summary>
+  <description>
+Provides methods such as addRow(), insertRow(), addCol() etc to build Console
+tables. Can be with or without headers, and has various configurable options.
+  </description>
+  <license>BSD</license>
+
+  <maintainers>
+    <maintainer>
+      <user>richard</user>
+      <role>lead</role>
+      <name>Richard Heyes</name>
+      <email>richard@phpguru.org</email>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <version>0.8</version>
+    <date>2002-09-02</date>
+    <notes>Initial release</notes>
+    <state>beta</state>
+    <filelist>
+	    <dir name="/" baseinstalldir="Console">
+	        <file role="php">Table.php</file>
+	    </dir>
+	</filelist>
+  </release>
+
+  <changelog>
+
+    <release>
+      <version>0.8</version>
+      <date>2002-09-02</date>
+      <notes>Initial release</notes>
+      <state>beta</state>
+	</release>
+
+  </changelog>
+</package>
