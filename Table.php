@@ -1,6 +1,6 @@
 <?php
 // +-----------------------------------------------------------------------+ 
-// | Copyright (c) 2002-2003 Richard Heyes                                     | 
+// | Copyright (c) 2002-2003 Richard Heyes                                 | 
 // | All rights reserved.                                                  | 
 // |                                                                       | 
 // | Redistribution and use in source and binary forms, with or without    | 
@@ -35,278 +35,321 @@
 // $Id$
 // 
 // Utility for printing tables from cmdline scripts
-// 
+//
+
+define('CONSOLE_TABLE_HORIZONTAL_RULE', 1);
 
 class Console_Table
 {
-	/**
+    /**
     * The table headers
-	* @var array
+    * @var array
     */
-	var $_headers;
+    var $_headers;
 
-	/**
+    /**
     * The data of the table
-	* @var array
+    * @var array
     */
-	var $_data;
+    var $_data;
 
-	/**
+    /**
     * The max number of columns in a row
-	* @var integer
+    * @var integer
     */
-	var $_max_cols;
+    var $_max_cols;
 
-	/**
+    /**
     * The max number of rows in the table
-	* @var integer
+    * @var integer
     */
-	var $_max_rows;
+    var $_max_rows;
 
-	/**
+    /**
     * Lengths of the columns, calculated
-	* when rows are added to the table.
-	* @var array
+    * when rows are added to the table.
+    * @var array
     */
-	var $_cell_lengths;
+    var $_cell_lengths;
 
-	/**
+    /**
     * Some options that configure various
-	* things
-	* @var array;
+    * things
+    * @var array;
     */
-	var $_options;
-	
-	/**
+    var $_options;
+    
+    /**
     * How many spaces to use to pad the table
-	* @var integer
+    * @var integer
     */
-	var $_padding;
+    var $_padding;
 
-	/**
+    /**
     * Constructor
     */
-	function Console_Table()
-	{
-		$this->_headers      = array();
-		$this->_data         = array();
-		$this->_cell_lengths = array();
-		$this->_max_cols     = 0;
-		$this->_max_rows     = 0;
-		$this->_padding      = 1;
-	}
-	
-	/**
+    function Console_Table()
+    {
+        $this->_headers      = array();
+        $this->_data         = array();
+        $this->_cell_lengths = array();
+        $this->_max_cols     = 0;
+        $this->_max_rows     = 0;
+        $this->_padding      = 1;
+    }
+    
+    /**
+    * Converts an array to a table. Must be a two dimensional array.
+    * (Static)
+    * 
+    * @param array $headers      Headers for the table
+    * @param array $data         Data for the table
+    * @param bool  $returnObject Whether to return the Console_Table object (default: No)
+    */
+    function fromArray($headers, $data, $returnObject = false)
+    {
+        if (!is_array($headers) OR !is_array($data)) {
+            return false;
+        }
+
+        $table = &new Console_Table();
+        $table->setHeaders($headers);
+        
+        foreach ($data as $row) {
+            $table->addRow(array_values($row));
+        }
+
+        return $returnObject ? $table : $table->getTable();
+    }
+    
+    /**
     * Sets the headers for the columns
-	*
-	* @param array $headers The column headers
+    *
+    * @param array $headers The column headers
     */
-	function setHeaders($headers)
-	{
-		$this->_headers = $headers;
-		$this->_updateRowsCols($headers);
-	}
+    function setHeaders($headers)
+    {
+        $this->_headers = $headers;
+        $this->_updateRowsCols($headers);
+    }
 
-	/**
+    /**
     * Adds a row to the table
-	*
-	* @param array $row    The row data to add
-	* @param array $append Whether to append or prepend the row
+    *
+    * @param array $row    The row data to add
+    * @param array $append Whether to append or prepend the row
     */
-	function addRow($row, $append = true)
-	{
-		$append ? $this->_data[] = array_values($row) : array_unshift($this->_data, array_values($row));
+    function addRow($row, $append = true)
+    {
+        $append ? $this->_data[] = array_values($row) : array_unshift($this->_data, array_values($row));
 
-		$this->_updateRowsCols($row);
-	}
-	
-	/**
+        $this->_updateRowsCols($row);
+    }
+    
+    /**
     * Inserts a row after a given row number in the table. If $row_id
-	* is not given it will prepend the row.
-	*
-	* @param array   $row    The data to insert
-	* @param integer $row_id Row number to insert before
+    * is not given it will prepend the row.
+    *
+    * @param array   $row    The data to insert
+    * @param integer $row_id Row number to insert before
     */
-	function insertRow($row, $row_id = 0)
-	{
-		array_splice($this->_data, $row_id, 0, array($row));
+    function insertRow($row, $row_id = 0)
+    {
+        array_splice($this->_data, $row_id, 0, array($row));
 
-		$this->_updateRowsCols($row);
-	}
-	
-	/**
+        $this->_updateRowsCols($row);
+    }
+    
+    /**
     * Adds a column to the table
-	*
-	* @param array   $col_data The data of the column. Can be numeric or associative array
-	* @param integer $col_id   The column index to populate
-	* @param integer $row_id   If starting row is not zero, specify it here
+    *
+    * @param array   $col_data The data of the column. Can be numeric or associative array
+    * @param integer $col_id   The column index to populate
+    * @param integer $row_id   If starting row is not zero, specify it here
     */
-	function addCol($col_data, $col_id = 0, $row_id = 0)
-	{
-		foreach ($col_data as $col_cell) {
-			$this->_data[$row_id++][$col_id] = $col_cell;
-		}
+    function addCol($col_data, $col_id = 0, $row_id = 0)
+    {
+        foreach ($col_data as $col_cell) {
+            $this->_data[$row_id++][$col_id] = $col_cell;
+        }
 
-		$this->_updateRowsCols();
-		$this->_max_cols = max($this->_max_cols, $col_id + 1);
-	}
-	
-	/**
+        $this->_updateRowsCols();
+        $this->_max_cols = max($this->_max_cols, $col_id + 1);
+    }
+    
+    /**
     * Adds data to the table. Argument should be
-	* a two dimensional array containing the data
-	* to be added.
-	*
-	* @param array   $data   The data to add to the table
-	* @param integer $col_id Optional starting column ID
-	* @param integer $row_id Optional starting row ID
+    * a two dimensional array containing the data
+    * to be added.
+    *
+    * @param array   $data   The data to add to the table
+    * @param integer $col_id Optional starting column ID
+    * @param integer $row_id Optional starting row ID
     */
-	function addData($data, $col_id = 0, $row_id = 0)
-	{
-		foreach ($data as $row) {
-			$starting_col = $col_id;
-			foreach ($row as $cell) {
-				$this->_data[$row_id][$starting_col++] = $cell;
-			}
-			$this->_updateRowsCols();
-			$this->_max_cols = max($this->_max_cols, $starting_col);
-			$row_id++;
-		}
-	}
+    function addData($data, $col_id = 0, $row_id = 0)
+    {
+        foreach ($data as $row) {
+            $starting_col = $col_id;
+            foreach ($row as $cell) {
+                $this->_data[$row_id][$starting_col++] = $cell;
+            }
+            $this->_updateRowsCols();
+            $this->_max_cols = max($this->_max_cols, $starting_col);
+            $row_id++;
+        }
+    }
 
-	/**
+    /**
+    * Adds a Horizontal Seperator to the table
+    */
+    function addSeparator()
+    {
+        $this->_data[] = CONSOLE_TABLE_HORIZONTAL_RULE;
+    }
+
+
+    /**
     * Returns the table in wonderful
-	* ASCII art
+    * ASCII art
     */
-	function getTable()
-	{
-		$this->_validateTable();
-		return $this->_buildTable();
-	}
+    function getTable()
+    {
+        $this->_validateTable();
+        return $this->_buildTable();
+    }
 
-	/**
+    /**
     * Ensures column and row counts are correct
     */
-	function _validateTable()
-	{
-		for ($i=0; $i<$this->_max_rows; $i++) {
-			for ($j=0; $j<$this->_max_cols; $j++) {
-				if (!isset($this->_data[$i][$j])) {
-					$this->_data[$i][$j] = '';
-				}
+    function _validateTable()
+    {
+        for ($i=0; $i<$this->_max_rows; $i++) {
+            for ($j=0; $j<$this->_max_cols; $j++) {
+                if (!isset($this->_data[$i][$j]) AND $this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+                    $this->_data[$i][$j] = '';
+                }
 
-				// Update cell lengths
-				$this->_calculateCellLengths($this->_data[$i]);
-			}
-			ksort($this->_data[$i]);
-		}
-		
-		ksort($this->_data);
-	}
+                // Update cell lengths
+                $this->_calculateCellLengths($this->_data[$i]);
+            }
 
-	/**
+            if ($this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+                 ksort($this->_data[$i]);
+            }
+
+        }
+        
+        ksort($this->_data);
+    }
+
+    /**
     * Builds the table
     */
-	function _buildTable()
-	{
-		$return = array();
-		$rows   = $this->_data;
+    function _buildTable()
+    {
+        $return = array();
+        $rows   = $this->_data;
 
-		for ($i=0; $i<count($rows); $i++) {
-			for ($j=0; $j<count($rows[$i]); $j++) {
-				if (strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
-					$rows[$i][$j] = str_pad($rows[$i][$j], $this->_cell_lengths[$j], ' ');
-				}
-			}
-			
-			$row_begin    = '|' . str_repeat(' ', $this->_padding);
-			$row_end      = str_repeat(' ', $this->_padding) . '|';
-			$implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
+        for ($i=0; $i<count($rows); $i++) {
+            for ($j=0; $j<count($rows[$i]); $j++) {
+                if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE AND strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
+                    $rows[$i][$j] = str_pad($rows[$i][$j], $this->_cell_lengths[$j], ' ');
+                }
+            }
+            
+            if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+                $row_begin    = '|' . str_repeat(' ', $this->_padding);
+                $row_end      = str_repeat(' ', $this->_padding) . '|';
+                $implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
+                $return[] = $row_begin . implode($implode_char, $rows[$i]) . $row_end;
+            } else {
+                $return[] = $this->_getSeparator();
+            }
 
-			$return[] = $row_begin . implode($implode_char, $rows[$i]) . $row_end;
-		}
+        }
 
-		$return = $this->_getSeparator() . "\r\n" . implode("\n", $return) . "\r\n" . $this->_getSeparator() . "\r\n";
+        $return = $this->_getSeparator() . "\r\n" . implode("\n", $return) . "\r\n" . $this->_getSeparator() . "\r\n";
 
-		if (!empty($this->_headers)) {
-			$return = $this->_getHeaderLine() . "\r\n" . $return;
-		}
+        if (!empty($this->_headers)) {
+            $return = $this->_getHeaderLine() .  "\r\n" . $return;
+        }
 
-		return $return;
-	}
-	
-	/**
+        return $return;
+    }
+    
+    /**
     * Creates a horizontal separator for header
-	* separation and table start/end etc
-	*
+    * separation and table start/end etc
+    *
     */
-	function _getSeparator()
-	{
-		foreach ($this->_cell_lengths as $cl) {
-			$return[] = str_repeat('-', $cl);
-		}
+    function _getSeparator()
+    {
+        foreach ($this->_cell_lengths as $cl) {
+            $return[] = str_repeat('-', $cl);
+        }
 
-		$row_begin    = '+' . str_repeat('-', $this->_padding);
-		$row_end      = str_repeat('-', $this->_padding) . '+';
-		$implode_char = str_repeat('-', $this->_padding) . '+' . str_repeat('-', $this->_padding);
+        $row_begin    = '+' . str_repeat('-', $this->_padding);
+        $row_end      = str_repeat('-', $this->_padding) . '+';
+        $implode_char = str_repeat('-', $this->_padding) . '+' . str_repeat('-', $this->_padding);
 
-		$return = $row_begin . implode($implode_char, $return) . $row_end;
-		
-		return $return;
-	}
+        $return = $row_begin . implode($implode_char, $return) . $row_end;
+        
+        return $return;
+    }
 
-	/**
+    /**
     * Returns header line for the table
     */
-	function _getHeaderLine()
-	{
-		// Make sure column count is correct
-		for ($i=0; $i<$this->_max_cols; $i++) {
-			if (!isset($this->_headers[$i])) {
-				$this->_headers[$i] = '';
-			}
-		}
+    function _getHeaderLine()
+    {
+        // Make sure column count is correct
+        for ($i=0;  $i<$this->_max_cols; $i++) {
+            if (!isset($this->_headers[$i])) {
+                $this->_headers[$i] = '';
+            }
+        }
 
-		for ($i=0; $i<count($this->_headers); $i++) {
-			if (strlen($this->_headers[$i]) < $this->_cell_lengths[$i]) {
-				$this->_headers[$i] = str_pad($this->_headers[$i], $this->_cell_lengths[$i], ' ');
-			}
-		}
-			
-		$row_begin    = '|' . str_repeat(' ', $this->_padding);
-		$row_end      = str_repeat(' ', $this->_padding) . '|';
-		$implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
+        for ($i=0; $i<count($this->_headers); $i++) {
+            if (strlen($this->_headers[$i]) < $this->_cell_lengths[$i]) {
+                $this->_headers[$i] = str_pad($this->_headers[$i], $this->_cell_lengths[$i], ' ');
+            }
+        }
+            
+        $row_begin    = '|' . str_repeat(' ', $this->_padding);
+        $row_end      = str_repeat(' ', $this->_padding) . '|';
+        $implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
 
-		$return[] = $this->_getSeparator();
-		$return[] = $row_begin . implode($implode_char, $this->_headers) . $row_end;
+        $return[] = $this->_getSeparator();
+        $return[] = $row_begin . implode($implode_char, $this->_headers) . $row_end;
 
-		return implode("\r\n", $return);
-	}
+        return implode("\r\n", $return);
+    }
 
-	/**
+    /**
     * Update max cols/rows
     */
-	function _updateRowsCols($rowdata = null)
-	{
-		// Update max cols
-		$this->_max_cols = max($this->_max_cols, count($rowdata));
+    function _updateRowsCols($rowdata = null)
+    {
+        // Update max cols
+        $this->_max_cols = max($this->_max_cols, count($rowdata));
 
-		// Update max rows
-		ksort($this->_data);
-		$this->_max_rows = end(array_keys($this->_data)) + 1;
-	}
+        // Update max rows
+        ksort($this->_data);
+        $this->_max_rows = end(array_keys($this->_data)) + 1;
+    }
 
-	/**
+    /**
     * This function given a row of data will
-	* calculate the max length for each column
-	* and store it in the _cell_lengths array.
-	*
-	* @param array $row The row data
+    * calculate the max length for each column
+    * and store it in the _cell_lengths array.
+    *
+    * @param array $row The row data
     */
-	function _calculateCellLengths($row)
-	{
-		for ($i=0; $i<count($row); $i++) {
-			$this->_cell_lengths[$i] = max(strlen(@$this->_headers[$i]), @$this->_cell_lengths[$i], strlen(@$row[$i]));
-		}
-	}
+    function _calculateCellLengths($row)
+    {
+        for ($i=0; $i<count($row); $i++) {
+            $this->_cell_lengths[$i] = max(strlen(@$this->_headers[$i]), @$this->_cell_lengths[$i], strlen(@$row[$i]));
+        }
+    }
 }
 ?>
