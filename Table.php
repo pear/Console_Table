@@ -76,6 +76,12 @@ class Console_Table
 	* @var array;
     */
 	var $_options;
+	
+	/**
+    * How many spaces to use to pad the table
+	* @var integer
+    */
+	var $_padding;
 
 	/**
     * Constructor
@@ -87,11 +93,7 @@ class Console_Table
 		$this->_cell_lengths = array();
 		$this->_max_cols     = 0;
 		$this->_max_rows     = 0;
-		
-		// Default options
-		$this->_options['padding']        = 1;
-		$this->_options['pad_string']     = ' ';
-		$this->_options['cell_separator'] = '|';
+		$this->_padding      = 1;
 	}
 	
 	/**
@@ -133,7 +135,7 @@ class Console_Table
 	}
 	
 	/**
-    * Adds a column ro the table
+    * Adds a column to the table
 	*
 	* @param array   $col_data The data of the column. Can be numeric or associative array
 	* @param integer $col_id   The column index to populate
@@ -147,6 +149,28 @@ class Console_Table
 
 		$this->_updateRowsCols();
 		$this->_max_cols = max($this->_max_cols, $col_id + 1);
+	}
+	
+	/**
+    * Adds data to the table. Argument should be
+	* a two dimensional array containing the data
+	* to be added.
+	*
+	* @param array   $data   The data to add to the table
+	* @param integer $col_id Optional starting column ID
+	* @param integer $row_id Optional starting row ID
+    */
+	function addData($data, $col_id = 0, $row_id = 0)
+	{
+		foreach ($data as $row) {
+			$starting_col = $col_id;
+			foreach ($row as $cell) {
+				$this->_data[$row_id][$starting_col++] = $cell;
+			}
+			$this->_updateRowsCols();
+			$this->_max_cols = max($this->_max_cols, $starting_col);
+			$row_id++;
+		}
 	}
 
 	/**
@@ -190,13 +214,13 @@ class Console_Table
 		for ($i=0; $i<count($rows); $i++) {
 			for ($j=0; $j<count($rows[$i]); $j++) {
 				if (strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
-					$rows[$i][$j] = str_pad($rows[$i][$j], $this->_cell_lengths[$j], $this->_options['pad_string']);
+					$rows[$i][$j] = str_pad($rows[$i][$j], $this->_cell_lengths[$j], ' ');
 				}
 			}
 			
-			$row_begin    = '|' . str_repeat($this->_options['pad_string'], $this->_options['padding']);
-			$row_end      = str_repeat($this->_options['pad_string'], $this->_options['padding']) . '|';
-			$implode_char = str_repeat($this->_options['pad_string'], $this->_options['padding']) . '|' . str_repeat($this->_options['pad_string'], $this->_options['padding']);
+			$row_begin    = '|' . str_repeat(' ', $this->_padding);
+			$row_end      = str_repeat(' ', $this->_padding) . '|';
+			$implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
 
 			$return[] = $row_begin . implode($implode_char, $rows[$i]) . $row_end;
 		}
@@ -227,9 +251,9 @@ class Console_Table
 			$return[] = str_repeat('-', $cl);
 		}
 
-		$row_begin    = '+' . str_repeat('-', $this->_options['padding']);
-		$row_end      = str_repeat('-', $this->_options['padding']) . '+';
-		$implode_char = str_repeat('-', $this->_options['padding']) . '+' . str_repeat('-', $this->_options['padding']);
+		$row_begin    = '+' . str_repeat('-', $this->_padding);
+		$row_end      = str_repeat('-', $this->_padding) . '+';
+		$implode_char = str_repeat('-', $this->_padding) . '+' . str_repeat('-', $this->_padding);
 
 		$return = $row_begin . implode($implode_char, $return) . $row_end;
 		
@@ -250,13 +274,13 @@ class Console_Table
 
 		for ($i=0; $i<count($this->_headers); $i++) {
 			if (strlen($this->_headers[$i]) < $this->_cell_lengths[$i]) {
-				$this->_headers[$i] = str_pad($this->_headers[$i], $this->_cell_lengths[$i], $this->_options['pad_string']);
+				$this->_headers[$i] = str_pad($this->_headers[$i], $this->_cell_lengths[$i], ' ');
 			}
 		}
 			
-		$row_begin    = '|' . str_repeat($this->_options['pad_string'], $this->_options['padding']);
-		$row_end      = str_repeat($this->_options['pad_string'], $this->_options['padding']) . '|';
-		$implode_char = str_repeat($this->_options['pad_string'], $this->_options['padding']) . '|' . str_repeat($this->_options['pad_string'], $this->_options['padding']);
+		$row_begin    = '|' . str_repeat(' ', $this->_padding);
+		$row_end      = str_repeat(' ', $this->_padding) . '|';
+		$implode_char = str_repeat(' ', $this->_padding) . '|' . str_repeat(' ', $this->_padding);
 
 		$return[] = $this->_getSeparator();
 		$return[] = $row_begin . implode($implode_char, $this->_headers) . $row_end;
