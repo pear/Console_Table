@@ -21,19 +21,26 @@ tables. Can be with or without headers, and has various configurable options.
   </maintainers>
 
   <release>
-    <version>0.8</version>
-    <date>2002-09-02</date>
-    <notes>Initial release</notes>
-    <state>beta</state>
+    <version>1.0</version>
+    <date>2003-01-24</date>
+    <notes>Removed a few options and added addData() method</notes>
+    <state>stable</state>
     <filelist>
 	    <dir name="/" baseinstalldir="Console">
-	        <file role="php">Table.php</file>
+	        <file role="php" name="Table.php" />
 	    </dir>
 	</filelist>
   </release>
 
   <changelog>
 
+  	<release>
+	    <version>0.8</version>
+	    <date>2002-09-02</date>
+	    <notes>Initial release</notes>
+	    <state>beta</state>
+	</release>
+	
     <release>
       <version>0.8</version>
       <date>2002-09-02</date>
