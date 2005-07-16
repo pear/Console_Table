@@ -33,32 +33,39 @@ tables. Can be with or without headers, and has various configurable options.
   </maintainers>
 
   <release>
-    <version>1.0</version>
-    <date>2003-01-24</date>
-    <notes>Removed a few options and added addData() method</notes>
+    <version>1.0.1</version>
+    <date>2005-07-16</date>
+    <notes>Added support for column alignment. Patch from Michael Richter</notes>
     <state>stable</state>
     <filelist>
-	    <dir name="/" baseinstalldir="Console">
-	        <file role="php" name="Table.php" />
-	    </dir>
-	</filelist>
+        <dir name="/" baseinstalldir="Console">
+            <file role="php" name="Table.php" />
+        </dir>
+    </filelist>
   </release>
 
   <changelog>
 
-  	<release>
-	    <version>0.8</version>
-	    <date>2002-09-02</date>
-	    <notes>Initial release</notes>
-	    <state>beta</state>
-	</release>
-	
+    <release>
+        <version>1.0</version>
+        <date>2003-01-24</date>
+        <notes>Removed a few options and added addData() method</notes>
+        <state>stable</state>
+    </release>
+    
+    <release>
+        <version>0.8</version>
+        <date>2002-09-02</date>
+        <notes>Initial release</notes>
+        <state>beta</state>
+    </release>
+    
     <release>
       <version>0.8</version>
       <date>2002-09-02</date>
       <notes>Initial release</notes>
       <state>beta</state>
-	</release>
+    </release>
 
   </changelog>
 </package>
