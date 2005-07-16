@@ -33,7 +33,7 @@ tables. Can be with or without headers, and has various configurable options.
   </maintainers>
 
   <release>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <date>2005-07-16</date>
     <notes>Added support for column alignment. Patch from Michael Richter</notes>
     <state>stable</state>
