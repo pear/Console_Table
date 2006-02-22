@@ -125,6 +125,13 @@ class Console_Table
 
 
     /**
+     * Charset of the data
+     * @var string
+     */
+    var $_charset = 'utf-8';
+
+
+    /**
     * Constructor
     *
     * @param int $align Default alignment
@@ -182,6 +189,15 @@ class Console_Table
         $this->_filters[] = array($col, &$callback);
     }
 
+    /**
+     * Sets the charset of the provided table data.
+     *
+     * @string $charset  A charset supported by the mbstring PHP extension.
+     */
+    function setCharset($charset)
+    {
+        $this->_charset = $charset;
+    }
 
     /**
     * Sets the alignment for the columns
@@ -407,7 +423,7 @@ class Console_Table
 
         for ($i=0; $i<count($rows); $i++) {
             for ($j=0; $j<count($rows[$i]); $j++) {
-                if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE AND strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
+                if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE AND $this->_strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
                     $rows[$i][$j] = str_pad($rows[$i][$j], $this->_cell_lengths[$j], ' ', $this->_col_align[$j]);
                 }
             }
@@ -467,7 +483,7 @@ class Console_Table
         }
 
         for ($i=0; $i<count($this->_headers); $i++) {
-            if (strlen($this->_headers[$i]) < $this->_cell_lengths[$i]) {
+            if ($this->_strlen($this->_headers[$i]) < $this->_cell_lengths[$i]) {
                 $this->_headers[$i] = str_pad($this->_headers[$i], $this->_cell_lengths[$i], ' ', $this->_col_align[$i]);
             }
         }
@@ -521,8 +537,31 @@ class Console_Table
     function _calculateCellLengths($row)
     {
         for ($i=0; $i<count($row); $i++) {
-            $this->_cell_lengths[$i] = max(strlen(@$this->_headers[$i]), @$this->_cell_lengths[$i], strlen(@$row[$i]));
+            $this->_cell_lengths[$i] = max($this->_strlen(@$this->_headers[$i]), @$this->_cell_lengths[$i], $this->_strlen(@$row[$i]));
         }
     }
+
+    /**
+     * Returns the character length of a string.
+     *
+     * @param string $str  A multibyte or singlebyte string.
+     *
+     * @return integer  The string length.
+     */
+    function _strlen($str)
+    {
+        static $mbstring;
+
+        // Cache expensive function_exists() calls.
+        if (!isset($mbstring)) {
+            $mbstring = function_exists('mb_strlen');
+        }
+
+        if ($mbstring) {
+            return mb_strlen($str, $this->_charset);
+        }
+
+        return strlen($str);
+    }
+
 }
-?>
