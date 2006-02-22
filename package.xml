@@ -44,6 +44,12 @@
     <filelist>
         <dir name="/" baseinstalldir="Console">
             <file role="php" name="Table.php" />
+            <dir name="tests">
+                <file role="test" name="assoziative_arrays.phpt"/>
+                <file role="test" name="multibyte.phpt"/>
+                <file role="test" name="no_header.phpt"/>
+                <file role="test" name="no_rows.phpt"/>
+            </dir>
         </dir>
     </filelist>
   </release>
