@@ -377,7 +377,9 @@ class Console_Table
     {
         for ($i=0; $i<$this->_max_rows; $i++) {
             for ($j=0; $j<$this->_max_cols; $j++) {
-                if (!isset($this->_data[$i][$j]) AND $this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+                if (!isset($this->_data[$i][$j]) &&
+                    (!isset($this->_data[$i]) ||
+                     $this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE)) {
                     $this->_data[$i][$j] = '';
                 }
 
