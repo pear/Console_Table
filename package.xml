@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
 <package version="1.0">
 
   <name>Console_Table</name>
@@ -30,12 +28,18 @@ tables. Can be with or without headers, and has various configurable options.
       <name>Xavier Noguer</name>
       <email>xnoguer@php.net</email>
     </maintainer>
+    <maintainer>
+      <user>yunosh</user>
+      <role>developer</role>
+      <name>Jan Schneider</name>
+      <email>jan@horde.org</email>
+    </maintainer>
   </maintainers>
 
   <release>
-    <version>1.0.2</version>
-    <date>2005-07-16</date>
-    <notes>Added support for column alignment. Patch from Michael Richter</notes>
+    <version>1.0.3</version>
+    <date>2006-99-99</date>
+    <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" baseinstalldir="Console">
@@ -45,7 +49,20 @@ tables. Can be with or without headers, and has various configurable options.
   </release>
 
   <changelog>
-
+    <release>
+        <version>1.0.2</version>
+        <date>2005-07-16</date>
+        <notes>Added support for column alignment. Patch from Michael Richter</notes>
+        <state>stable</state>
+    </release>
+    
+    <release>
+        <version>1.0.1</version>
+        <date>2003-03-03</date>
+        <notes>Fixed a caching bug</notes>
+        <state>stable</state>
+    </release>
+    
     <release>
         <version>1.0</version>
         <date>2003-01-24</date>
@@ -59,13 +76,5 @@ tables. Can be with or without headers, and has various configurable options.
         <notes>Initial release</notes>
         <state>beta</state>
     </release>
-    
-    <release>
-      <version>0.8</version>
-      <date>2002-09-02</date>
-      <notes>Initial release</notes>
-      <state>beta</state>
-    </release>
-
   </changelog>
 </package>

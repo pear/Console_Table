@@ -30,6 +30,7 @@
 // |                                                                       |
 // +-----------------------------------------------------------------------+
 // | Author: Richard Heyes <richard@phpguru.org>                           |
+// |         Jan Schneider <jan@horde.org>                                 |
 // +-----------------------------------------------------------------------+
 //
 // $Id$
@@ -160,7 +161,7 @@ class Console_Table
         $table->setHeaders($headers);
 
         foreach ($data as $row) {
-            $table->addRow(array_values($row));
+            $table->addRow($row);
         }
 
         return $returnObject ? $table : $table->getTable();
@@ -227,7 +228,7 @@ class Console_Table
     */
     function setHeaders($headers)
     {
-        $this->_headers = $headers;
+        $this->_headers = array_values($headers);
         $this->_updateRowsCols($headers);
     }
 
