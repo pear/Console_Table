@@ -491,7 +491,8 @@ class Console_Table
 
         // Update max rows
         ksort($this->_data);
-        $this->_max_rows = end(array_keys($this->_data)) + 1;
+        $keys = array_keys($this->_data);
+        $this->_max_rows = end($keys) + 1;
 
         switch ($this->_defaultAlign) {
             case CONSOLE_TABLE_ALIGN_CENTER: $pad = STR_PAD_BOTH; break;
