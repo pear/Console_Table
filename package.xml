@@ -41,7 +41,8 @@ tables. Can be with or without headers, and has various configurable options.
     <date>2006-99-99</date>
     <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
 * Fix fatal reference error with some PHP versions (Bug 5309).
-* Fix notice if no data has been provided (Bug 5851).</notes>
+* Fix notice if no data has been provided (Bug 5851).
+* Added multibyte support (Request 2934).</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" baseinstalldir="Console">
