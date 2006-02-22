@@ -39,7 +39,8 @@ tables. Can be with or without headers, and has various configurable options.
   <release>
     <version>1.0.3</version>
     <date>2006-99-99</date>
-    <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).</notes>
+    <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
+* Fix fatal reference error with some PHP versions (Bug 5309).</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" baseinstalldir="Console">
