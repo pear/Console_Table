@@ -3,10 +3,7 @@
 
   <name>Console_Table</name>
   <summary>Class that makes it easy to build console style tables</summary>
-  <description>
-Provides methods such as addRow(), insertRow(), addCol() etc to build Console
-tables. Can be with or without headers, and has various configurable options.
-  </description>
+  <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers.</description>
   <license>BSD</license>
 
   <maintainers>
@@ -30,7 +27,7 @@ tables. Can be with or without headers, and has various configurable options.
     </maintainer>
     <maintainer>
       <user>yunosh</user>
-      <role>developer</role>
+      <role>lead</role>
       <name>Jan Schneider</name>
       <email>jan@horde.org</email>
     </maintainer>
@@ -38,7 +35,7 @@ tables. Can be with or without headers, and has various configurable options.
 
   <release>
     <version>1.0.3</version>
-    <date>2006-99-99</date>
+    <date>2006-02-22</date>
     <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
 * Fix fatal reference error with some PHP versions (Bug 5309).
 * Fix notice if no data has been provided (Bug 5851).
@@ -80,4 +77,5 @@ tables. Can be with or without headers, and has various configurable options.
         <state>beta</state>
     </release>
   </changelog>
+
 </package>
