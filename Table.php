@@ -312,9 +312,10 @@ class Console_Table
     }
 
 
-    /**
-    * Returns the table in wonderful
-    * ASCII art
+    /*
+    * Returns the table in wonderful ASCII art.
+    *
+    * @return string  The generated table.
     */
     function getTable()
     {
