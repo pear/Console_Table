@@ -185,7 +185,7 @@ class Console_Table
      */
     function setCharset($charset)
     {
-        $this->_charset = $charset;
+        $this->_charset = strtolower($charset);
     }
 
     /**
@@ -536,13 +536,21 @@ class Console_Table
      */
     function _strlen($str)
     {
-        static $mbstring;
+        static $mbstring, $utf8;
 
         // Cache expensive function_exists() calls.
         if (!isset($mbstring)) {
             $mbstring = function_exists('mb_strlen');
         }
+        if (!isset($utf8)) {
+            $utf8 = function_exists('utf8_decode');
+        }
 
+        if ($utf8 &&
+            ($this->_charset == strtolower('utf-8') ||
+             $this->_charset == strtolower('utf8'))) {
+            return strlen(utf8_decode($str));
+        }
         if ($mbstring) {
             return mb_strlen($str, $this->_charset);
         }
