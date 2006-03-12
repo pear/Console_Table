@@ -35,7 +35,7 @@
 
   <release>
     <version>1.0.3</version>
-    <date>2006-02-22</date>
+    <date>2006-03-13</date>
     <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
 * Fix fatal reference error with some PHP versions (Bug 5309).
 * Fix notice if no data has been provided (Bug 5851).
