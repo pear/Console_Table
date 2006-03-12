@@ -14,22 +14,22 @@
       <email>richard@phpguru.org</email>
     </maintainer>
     <maintainer>
-      <user>tal</user>
+      <user>yunosh</user>
       <role>lead</role>
+      <name>Jan Schneider</name>
+      <email>jan@horde.org</email>
+    </maintainer>
+    <maintainer>
+      <user>tal</user>
+      <role>developer, inactive</role>
       <name>Tal Peer</name>
       <email>tal@php.net</email>
     </maintainer>
     <maintainer>
       <user>xnoguer</user>
-      <role>lead</role>
+      <role>developer, inactive</role>
       <name>Xavier Noguer</name>
       <email>xnoguer@php.net</email>
-    </maintainer>
-    <maintainer>
-      <user>yunosh</user>
-      <role>lead</role>
-      <name>Jan Schneider</name>
-      <email>jan@horde.org</email>
     </maintainer>
   </maintainers>
 
@@ -39,7 +39,7 @@
     <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
 * Fix fatal reference error with some PHP versions (Bug 5309).
 * Fix notice if no data has been provided (Bug 5851).
-* Added multibyte support (Request 2934).</notes>
+* Added multibyte support (Requests 2934 and 7014).</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" baseinstalldir="Console">
