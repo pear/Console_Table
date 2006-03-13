@@ -81,6 +81,13 @@ class Console_Table
     var $_cell_lengths = array();
 
     /**
+     * Heights of the rows.
+     *
+     * @var array
+     */
+    var $_row_heights = array();
+
+    /**
      * How many spaces to use to pad the table.
      *
      * @var integer
@@ -378,8 +385,7 @@ class Console_Table
                     $this->_data[$i][$j] = '';
                 }
 
-                // Update cell lengths
-                $this->_calculateCellLengths($this->_data[$i]);
+                $this->_calculateRowHeight($i, $this->_data[$i]);
             }
 
             if ($this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
@@ -388,7 +394,56 @@ class Console_Table
 
         }
 
+        $this->_splitMultilineRows();
+
+        // Update cell lengths.
+        for ($i = 0; $i < $this->_max_rows; $i++) {
+            $this->_calculateCellLengths($this->_data[$i]);
+        }
+
         ksort($this->_data);
+    }
+
+    /**
+     * Splits multiline rows into many smaller one-line rows.
+     */
+    function _splitMultilineRows() {
+
+        $inserted = 0;
+        ksort($this->_data);
+        $new_data = $this->_data;
+
+        for ($i = 0; $i < $this->_max_rows; $i++) {
+            // Process only rows that have many lines.
+            if (($height = $this->_row_heights[$i]) > 1) {
+                // Split column data into one-liners.
+                $split = array();
+                for ($j = 0; $j < $this->_max_cols; $j++) {
+                    $split[$j] = preg_split('/\r?\n|\r/', $this->_data[$i][$j]);
+                }
+
+                $new_rows = array();
+                // Construct new 'virtual' rows - insert empty strings for
+                // columns that have less lines that the highest one.
+                for ($i2 = 0; $i2 < $height; $i2++) {
+                    for ($j = 0; $j < $this->_max_cols; $j++) {
+                        $new_rows[$i2][$j] = !empty($split[$j][$i2]) ? $split[$j][$i2] : '';
+                    }
+                }
+
+                // Replace current row with smaller rows.  $inserted is used
+                // to take account of bigger array because of already inserted
+                // rows.
+                array_splice($new_data, $i + $inserted, 1, $new_rows);
+                $inserted += count($new_rows) - 1;
+            }
+        }
+
+        // Has the data been modified?
+        if ($inserted > 0) {
+            $this->_data = $new_data;
+            $this->_updateRowsCols();
+        }
     }
 
     /**
@@ -524,6 +579,31 @@ class Console_Table
             $this->_cell_lengths[$i] = max(isset($this->_headers[$i]) ? $this->_strlen($this->_headers[$i]) : 0,
                                            $this->_cell_lengths[$i],
                                            $this->_strlen($row[$i]));
+        }
+    }
+
+    /**
+     * This function given a row of data will calculate the max height for all
+     * columns and store it in the _row_heights array.
+     *
+     * @param integer $row_number  The row number.
+     * @param array $row           The row data.
+     */
+    function _calculateRowHeight($row_number, $row)
+    {
+        if (!isset($this->_row_heights[$row_number])) {
+            $this->_row_heights[$row_number] = 1;
+        }
+
+        // Do not process horizontal rule rows.
+        if ($row == CONSOLE_TABLE_HORIZONTAL_RULE) {
+            return;
+        }
+
+        for ($i = 0; $i < count($row); $i++) {
+            $lines = preg_split('/\r?\n|\r/', $row[$i]);
+            $this->_row_heights[$row_number] = max($this->_row_heights[$row_number],
+                                                   count($lines));
         }
     }
 

@@ -36,12 +36,9 @@
   </maintainers>
 
   <release>
-    <version>1.0.3</version>
-    <date>2006-03-13</date>
-    <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
-* Fix fatal reference error with some PHP versions (Bug 5309).
-* Fix notice if no data has been provided (Bug 5851).
-* Added multibyte support (Requests 2934 and 7014).</notes>
+    <version>1.0.4</version>
+    <date>2006-99-99</date>
+    <notes>* Add support for multi-line cells (koto at webworkers dot pl, Request #7017).</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" baseinstalldir="Console">
@@ -57,6 +54,16 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.0.3</version>
+      <date>2006-03-13</date>
+      <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
+*   Fix fatal reference error with some PHP versions (Bug 5309).
+*   Fix notice if no data has been provided (Bug 5851).
+*   Added multibyte support (Requests 2934 and 7014).</notes>
+      <state>stable</state>
+    </release>
+
     <release>
         <version>1.0.2</version>
         <date>2005-07-16</date>
