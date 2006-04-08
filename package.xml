@@ -37,7 +37,7 @@
 
   <release>
     <version>1.0.4</version>
-    <date>2006-99-99</date>
+    <date>2006-04-08</date>
     <notes>* Add support for multi-line cells (koto at webworkers dot pl, Request #7017).</notes>
     <state>stable</state>
     <filelist>
