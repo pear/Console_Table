@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <package version="1.0">
 
   <name>Console_Table</name>
@@ -41,16 +41,16 @@
     <notes></notes>
     <state>stable</state>
     <filelist>
-        <dir name="/" baseinstalldir="Console">
-            <file role="php" name="Table.php" />
-            <dir name="tests">
-                <file role="test" name="assoziative_arrays.phpt"/>
-                <file role="test" name="multibyte.phpt"/>
-                <file role="test" name="multiline.phpt"/>
-                <file role="test" name="no_header.phpt"/>
-                <file role="test" name="no_rows.phpt"/>
-            </dir>
+      <dir name="/" baseinstalldir="Console">
+        <file role="php" name="Table.php" />
+        <dir name="tests">
+          <file role="test" name="assoziative_arrays.phpt"/>
+          <file role="test" name="multibyte.phpt"/>
+          <file role="test" name="multiline.phpt"/>
+          <file role="test" name="no_header.phpt"/>
+          <file role="test" name="no_rows.phpt"/>
         </dir>
+      </dir>
     </filelist>
   </release>
 
@@ -73,31 +73,31 @@
     </release>
 
     <release>
-        <version>1.0.2</version>
-        <date>2005-07-16</date>
-        <notes>Added support for column alignment. Patch from Michael Richter</notes>
-        <state>stable</state>
+      <version>1.0.2</version>
+      <date>2005-07-16</date>
+      <notes>Added support for column alignment. Patch from Michael Richter</notes>
+      <state>stable</state>
     </release>
     
     <release>
-        <version>1.0.1</version>
-        <date>2003-03-03</date>
-        <notes>Fixed a caching bug</notes>
-        <state>stable</state>
+      <version>1.0.1</version>
+      <date>2003-03-03</date>
+      <notes>Fixed a caching bug</notes>
+      <state>stable</state>
     </release>
     
     <release>
-        <version>1.0</version>
-        <date>2003-01-24</date>
-        <notes>Removed a few options and added addData() method</notes>
-        <state>stable</state>
+      <version>1.0</version>
+      <date>2003-01-24</date>
+      <notes>Removed a few options and added addData() method</notes>
+      <state>stable</state>
     </release>
     
     <release>
-        <version>0.8</version>
-        <date>2002-09-02</date>
-        <notes>Initial release</notes>
-        <state>beta</state>
+      <version>0.8</version>
+      <date>2002-09-02</date>
+      <notes>Initial release</notes>
+      <state>beta</state>
     </release>
   </changelog>
 
