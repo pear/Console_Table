@@ -37,7 +37,7 @@
 
   <release>
     <version>1.0.5</version>
-    <date>2006-12-31</date>
+    <date>2006-08-28</date>
     <notes>* Allow to specify separator rules in addData().
 * Fix warnings when combining separator rules and callback filters (Bug #8566).</notes>
     <state>stable</state>
@@ -46,6 +46,7 @@
         <file role="php" name="Table.php" />
         <dir name="tests">
           <file role="test" name="assoziative_arrays.phpt"/>
+          <file role="test" name="filters.phpt"/>
           <file role="test" name="multibyte.phpt"/>
           <file role="test" name="multiline.phpt"/>
           <file role="test" name="no_header.phpt"/>
