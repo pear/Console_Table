@@ -301,6 +301,11 @@ class Console_Table
     function addData($data, $col_id = 0, $row_id = 0)
     {
         foreach ($data as $row) {
+            if ($row === CONSOLE_TABLE_HORIZONTAL_RULE) {
+                $this->_data[$row_id] = CONSOLE_TABLE_HORIZONTAL_RULE;
+                $row_id++;
+                continue;
+            }
             $starting_col = $col_id;
             foreach ($row as $cell) {
                 $this->_data[$row_id][$starting_col++] = $cell;
@@ -366,7 +371,9 @@ class Console_Table
                 $callback = $filter[1];
 
                 foreach ($this->_data as $row_id => $row_data) {
-                    $this->_data[$row_id][$column] = call_user_func($callback, $row_data[$column]);
+                    if ($row_data !== CONSOLE_TABLE_HORIZONTAL_RULE) {
+                        $this->_data[$row_id][$column] = call_user_func($callback, $row_data[$column]);
+                    }
                 }
             }
         }
@@ -381,14 +388,14 @@ class Console_Table
             for ($j = 0; $j < $this->_max_cols; $j++) {
                 if (!isset($this->_data[$i][$j]) &&
                     (!isset($this->_data[$i]) ||
-                     $this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE)) {
+                     $this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE)) {
                     $this->_data[$i][$j] = '';
                 }
 
                 $this->_calculateRowHeight($i, $this->_data[$i]);
             }
 
-            if ($this->_data[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+            if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
                  ksort($this->_data[$i]);
             }
 
@@ -456,7 +463,7 @@ class Console_Table
 
         for ($i = 0; $i < count($rows); $i++) {
             for ($j = 0; $j < count($rows[$i]); $j++) {
-                if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE &&
+                if ($rows[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE &&
                     $this->_strlen($rows[$i][$j]) < $this->_cell_lengths[$j]) {
                     $rows[$i][$j] = str_pad($rows[$i][$j],
                                             $this->_cell_lengths[$j],
@@ -465,7 +472,7 @@ class Console_Table
                 }
             }
 
-            if ($rows[$i] != CONSOLE_TABLE_HORIZONTAL_RULE) {
+            if ($rows[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
                 $row_begin    = '|' . str_repeat(' ', $this->_padding);
                 $row_end      = str_repeat(' ', $this->_padding) . '|';
                 $implode_char = str_repeat(' ', $this->_padding) . '|' .
@@ -596,7 +603,7 @@ class Console_Table
         }
 
         // Do not process horizontal rule rows.
-        if ($row == CONSOLE_TABLE_HORIZONTAL_RULE) {
+        if ($row === CONSOLE_TABLE_HORIZONTAL_RULE) {
             return;
         }
 
