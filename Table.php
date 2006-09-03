@@ -414,8 +414,8 @@ class Console_Table
     /**
      * Splits multiline rows into many smaller one-line rows.
      */
-    function _splitMultilineRows() {
-
+    function _splitMultilineRows()
+    {
         $inserted = 0;
         ksort($this->_data);
         $new_data = $this->_data;
