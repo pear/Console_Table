@@ -36,10 +36,9 @@
   </maintainers>
 
   <release>
-    <version>1.0.5</version>
-    <date>2006-08-28</date>
-    <notes>* Allow to specify separator rules in addData().
-* Fix warnings when combining separator rules and callback filters (Bug #8566).</notes>
+    <version>1.0.6</version>
+    <date>2007-01-19</date>
+    <notes>* Add support for multi-line headers (Request #8615).</notes>
     <state>stable</state>
     <filelist>
       <dir name="/" baseinstalldir="Console">
@@ -58,6 +57,13 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.0.5</version>
+      <date>2006-08-28</date>
+      <notes>* Allow to specify separator rules in addData().
+  * Fix warnings when combining separator rules and callback filters (Bug #8566).</notes>
+      <state>stable</state>
+    </release>
     <release>
       <version>1.0.4</version>
       <date>2006-04-08</date>
