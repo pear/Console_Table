@@ -1,120 +1,191 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<package version="1.0">
-
-  <name>Console_Table</name>
-  <summary>Class that makes it easy to build console style tables</summary>
-  <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers.</description>
-  <license>BSD</license>
-
-  <maintainers>
-    <maintainer>
-      <user>richard</user>
-      <role>lead</role>
-      <name>Richard Heyes</name>
-      <email>richard@phpguru.org</email>
-    </maintainer>
-    <maintainer>
-      <user>yunosh</user>
-      <role>lead</role>
-      <name>Jan Schneider</name>
-      <email>jan@horde.org</email>
-    </maintainer>
-    <maintainer>
-      <user>tal</user>
-      <role>developer</role>
-      <active>no</active>
-      <name>Tal Peer</name>
-      <email>tal@php.net</email>
-    </maintainer>
-    <maintainer>
-      <user>xnoguer</user>
-      <role>developer</role>
-      <active>no</active>
-      <name>Xavier Noguer</name>
-      <email>xnoguer@php.net</email>
-    </maintainer>
-  </maintainers>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.5.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Console_Table</name>
+ <channel>pear.php.net</channel>
+ <summary>Class that makes it easy to build console style tables</summary>
+ <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers.
+ </description>
+ <lead>
+  <name>Jan Schneider</name>
+  <user>yunosh</user>
+  <email>jan@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Richard Heyes</name>
+  <user>richard</user>
+  <email>richard@phpguru.org</email>
+  <active>no</active>
+ </lead>
+ <developer>
+  <name>Tal Peer</name>
+  <user>tal</user>
+  <email>tal@php.net</email>
+  <active>no</active>
+ </developer>
+ <developer>
+  <name>Xavier Noguer</name>
+  <user>xnoguer</user>
+  <email>xnoguer@php.net</email>
+  <active>no</active>
+ </developer>
+ <date>2007-05-17</date>
+ <version>
+  <release>1.0.7</release>
+  <api>1.0.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+ <notes>* Fix header height if first data row has more than one line (Bug #11064).
+* Fix notice if header is not set.
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="tests">
+    <file baseinstalldir="Console" name="assoziative_arrays.phpt" role="test" />
+    <file baseinstalldir="Console" name="filters.phpt" role="test" />
+    <file baseinstalldir="Console" name="multibyte.phpt" role="test" />
+    <file baseinstalldir="Console" name="multiline.phpt" role="test" />
+    <file baseinstalldir="Console" name="no_header.phpt" role="test" />
+    <file baseinstalldir="Console" name="no_rows.phpt" role="test" />
+    <file baseinstalldir="Console" name="rules.phpt" role="test" />
+   </dir> <!-- //tests -->
+   <file baseinstalldir="Console" name="Table.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <version>1.0.7</version>
-    <date>2007-05-17</date>
-    <notes>* Fix header height if first data row has more than one line (Bug #11064).
-* Fix notice if header is not set.</notes>
-    <state>stable</state>
-    <filelist>
-      <dir name="/" baseinstalldir="Console">
-        <file role="php" name="Table.php" />
-        <dir name="tests">
-          <file role="test" name="assoziative_arrays.phpt"/>
-          <file role="test" name="filters.phpt"/>
-          <file role="test" name="multibyte.phpt"/>
-          <file role="test" name="multiline.phpt"/>
-          <file role="test" name="no_header.phpt"/>
-          <file role="test" name="no_rows.phpt"/>
-          <file role="test" name="rules.phpt"/>
-        </dir>
-      </dir>
-    </filelist>
+   <version>
+    <release>1.0.6</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-01-19</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Add support for multi-line headers (Request #8615).
+   </notes>
   </release>
-
-  <changelog>
-    <release>
-      <version>1.0.6</version>
-      <date>2007-01-19</date>
-      <notes>* Add support for multi-line headers (Request #8615).</notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.0.5</version>
-      <date>2006-08-28</date>
-      <notes>* Allow to specify separator rules in addData().
-  * Fix warnings when combining separator rules and callback filters (Bug #8566).</notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.0.4</version>
-      <date>2006-04-08</date>
-      <notes>* Add support for multi-line cells (koto at webworkers dot pl, Request #7017).</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.0.3</version>
-      <date>2006-03-13</date>
-      <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
+  <release>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-08-28</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Allow to specify separator rules in addData().
+  * Fix warnings when combining separator rules and callback filters (Bug #8566).
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-04-08</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Add support for multi-line cells (koto at webworkers dot pl, Request #7017).
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-03-13</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Fix cell width calculation if setting header with associative array (Bug 4299).
 *   Fix fatal reference error with some PHP versions (Bug 5309).
 *   Fix notice if no data has been provided (Bug 5851).
-*   Added multibyte support (Requests 2934 and 7014).</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.0.2</version>
-      <date>2005-07-16</date>
-      <notes>Added support for column alignment. Patch from Michael Richter</notes>
-      <state>stable</state>
-    </release>
-    
-    <release>
-      <version>1.0.1</version>
-      <date>2003-03-03</date>
-      <notes>Fixed a caching bug</notes>
-      <state>stable</state>
-    </release>
-    
-    <release>
-      <version>1.0</version>
-      <date>2003-01-24</date>
-      <notes>Removed a few options and added addData() method</notes>
-      <state>stable</state>
-    </release>
-    
-    <release>
-      <version>0.8</version>
-      <date>2002-09-02</date>
-      <notes>Initial release</notes>
-      <state>beta</state>
-    </release>
-  </changelog>
-
+*   Added multibyte support (Requests 2934 and 7014).
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-07-16</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>Added support for column alignment. Patch from Michael Richter
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-03-03</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>Fixed a caching bug
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-01-24</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>Removed a few options and added addData() method
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.8</release>
+    <api>0.8</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2002-09-02</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>Initial release
+   </notes>
+  </release>
+ </changelog>
 </package>
