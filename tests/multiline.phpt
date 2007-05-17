@@ -18,6 +18,10 @@ $table->setHeaders(array("h1\nmultiline", 'h2', "h3", 'h4'));
 $table->addData($data);
 echo $table->getTable();
 
+echo Console_Table::fromArray(array('one line header'),
+                              array(array("multiple\nlines"),
+                                    array('one line')));
+
 ?>
 --EXPECT--
 +-----------+--------+-----------+--------+
@@ -34,3 +38,10 @@ echo $table->getTable();
 | r4col1    | r4col2 | r4col3    | r4col4 |
 | r5col1    | r5col2 | r5col3    | r5col4 |
 +-----------+--------+-----------+--------+
++-----------------+
+| one line header |
++-----------------+
+| multiple        |
+| lines           |
+| one line        |
++-----------------+

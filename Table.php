@@ -380,11 +380,13 @@ class Console_Table
     }
 
     /**
-     * Ensures column and row counts are correct.
+     * Ensures that column and row counts are correct.
      */
     function _validateTable()
     {
-        $this->_calculateRowHeight(-1, $this->_headers[0]);
+        if (!empty($this->_headers)) {
+            $this->_calculateRowHeight(-1, $this->_headers[0]);
+        }
 
         for ($i = 0; $i < $this->_max_rows; $i++) {
             for ($j = 0; $j < $this->_max_cols; $j++) {
@@ -424,6 +426,7 @@ class Console_Table
         ksort($this->_data);
         $sections = array(&$this->_headers, &$this->_data);
         $max_rows = array(count($this->_headers), $this->_max_rows);
+        $row_height_offset = array(-1, 0);
 
         for ($s = 0; $s <= 1; $s++) {
             $inserted = 0;
@@ -431,7 +434,7 @@ class Console_Table
 
             for ($i = 0; $i < $max_rows[$s]; $i++) {
                 // Process only rows that have many lines.
-                if (($height = $this->_row_heights[$i]) > 1) {
+                if (($height = $this->_row_heights[$i + $row_height_offset[$s]]) > 1) {
                     // Split column data into one-liners.
                     $split = array();
                     for ($j = 0; $j < $this->_max_cols; $j++) {
@@ -621,7 +624,7 @@ class Console_Table
             return;
         }
 
-        for ($i = 0; $i < count($row); $i++) {
+        for ($i = 0, $c = count($row); $i < $c; ++$i) {
             $lines = preg_split('/\r?\n|\r/', $row[$i]);
             $this->_row_heights[$row_number] = max($this->_row_heights[$row_number],
                                                    count($lines));

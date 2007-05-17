@@ -36,9 +36,10 @@
   </maintainers>
 
   <release>
-    <version>1.0.6</version>
-    <date>2007-01-19</date>
-    <notes>* Add support for multi-line headers (Request #8615).</notes>
+    <version>1.0.7</version>
+    <date>2007-05-17</date>
+    <notes>* Fix header height if first data row has more than one line (Bug #11064).
+* Fix notice if header is not set.</notes>
     <state>stable</state>
     <filelist>
       <dir name="/" baseinstalldir="Console">
@@ -57,6 +58,12 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.0.6</version>
+      <date>2007-01-19</date>
+      <notes>* Add support for multi-line headers (Request #8615).</notes>
+      <state>stable</state>
+    </release>
     <release>
       <version>1.0.5</version>
       <date>2006-08-28</date>
