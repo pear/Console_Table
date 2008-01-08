@@ -44,17 +44,17 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>* Fix cell padding with multibyte strings under certain circumstances (Bug #12853).</notes>
  <contents>
-  <dir name="/">
+  <dir name="/" baseinstalldir="Console">
    <dir name="tests">
-    <file baseinstalldir="Console" name="assoziative_arrays.phpt" role="test" />
-    <file baseinstalldir="Console" name="filters.phpt" role="test" />
-    <file baseinstalldir="Console" name="multibyte.phpt" role="test" />
-    <file baseinstalldir="Console" name="multiline.phpt" role="test" />
-    <file baseinstalldir="Console" name="no_header.phpt" role="test" />
-    <file baseinstalldir="Console" name="no_rows.phpt" role="test" />
-    <file baseinstalldir="Console" name="rules.phpt" role="test" />
+    <file name="assoziative_arrays.phpt" role="test" />
+    <file name="filters.phpt" role="test" />
+    <file name="multibyte.phpt" role="test" />
+    <file name="multiline.phpt" role="test" />
+    <file name="no_header.phpt" role="test" />
+    <file name="no_rows.phpt" role="test" />
+    <file name="rules.phpt" role="test" />
    </dir> <!-- //tests -->
-   <file baseinstalldir="Console" name="Table.php" role="php" />
+   <file name="Table.php" role="php" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
