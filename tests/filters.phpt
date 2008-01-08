@@ -3,7 +3,7 @@ Callback filters
 --FILE--
 <?php
 
-require_once 'Console/Table.php';
+require_once dirname(__FILE__) . '/../Table.php';
 
 $data = array(
     array('one', 'two'),

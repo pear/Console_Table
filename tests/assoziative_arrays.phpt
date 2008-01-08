@@ -3,7 +3,7 @@ Header and data as associative arrays.
 --FILE--
 <?php
 
-require_once 'Console/Table.php';
+require_once dirname(__FILE__) . '/../Table.php';
 
 $headers = array(
     'one' => 'foo',
