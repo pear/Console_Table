@@ -3,11 +3,11 @@ Multibyte strings
 --FILE--
 <?php
 
-require_once 'Console/Table.php';
+require_once dirname(__FILE__) . '/../Table.php';
 
 $table = new Console_Table();
 $table->setHeaders(array('Schön', 'Häßlich'));
-$table->addData(array(array('Ich', 'Du')));
+$table->addData(array(array('Ich', 'Du'), array('Ä', 'Ü')));
 echo $table->getTable();
 
 ?>
@@ -16,4 +16,5 @@ echo $table->getTable();
 | Schön | Häßlich |
 +-------+---------+
 | Ich   | Du      |
+| Ä     | Ü       |
 +-------+---------+
