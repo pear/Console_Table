@@ -486,10 +486,11 @@ class Console_Table
             for ($j = 0; $j < count($this->_data[$i]); $j++) {
                 if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE &&
                     $this->_strlen($this->_data[$i][$j]) < $this->_cell_lengths[$j]) {
-                    $this->_data[$i][$j] = str_pad($this->_data[$i][$j],
-                                                   $this->_cell_lengths[$j],
-                                                   ' ',
-                                                   $this->_col_align[$j]);
+                    $this->_data[$i][$j] = $this->_str_pad(
+                        $this->_data[$i][$j],
+                        $this->_cell_lengths[$j],
+                        ' ',
+                        $this->_col_align[$j]);
                 }
             }
 
@@ -551,10 +552,11 @@ class Console_Table
         for ($j = 0; $j < count($this->_headers); $j++) {
             for ($i = 0; $i < count($this->_headers[$j]); $i++) {
                 if ($this->_strlen($this->_headers[$j][$i]) < $this->_cell_lengths[$i]) {
-                    $this->_headers[$j][$i] = str_pad($this->_headers[$j][$i],
-                                                      $this->_cell_lengths[$i],
-                                                      ' ',
-                                                      $this->_col_align[$i]);
+                    $this->_headers[$j][$i] = $this->_str_pad(
+                        $this->_headers[$j][$i],
+                        $this->_cell_lengths[$i],
+                        ' ',
+                        $this->_col_align[$i]);
                 }
             }
         }
@@ -673,6 +675,87 @@ class Console_Table
         }
 
         return strlen($str);
+    }
+
+    /**
+     * Returns part of a string.
+     *
+     * @param string $string   The string to be converted.
+     * @param integer $start   The part's start position, zero based.
+     * @param integer $length  The part's length.
+     *
+     * @return string  The string's part.
+     */
+    function _substr($string, $start, $length = null)
+    {
+        static $mbstring;
+
+        // Cache expensive function_exists() calls.
+        if (!isset($mbstring)) {
+            $mbstring = function_exists('mb_substr');
+        }
+
+        if (is_null($length)) {
+            $length = $this->_strlen($string);
+        }
+        if ($mbstring) {
+            $ret = @mb_substr($string, $start, $length, $this->_charset);
+            if (!empty($ret)) {
+                return $ret;
+            }
+        }
+        return substr($string, $start, $length);
+    }
+
+    /**
+     * Returns a string padded to a certain length with another string.
+     *
+     * This method behaves exactly like str_pad but is multibyte safe.
+     *
+     * @param string $input    The string to be padded.
+     * @param integer $length  The length of the resulting string.
+     * @param string $pad      The string to pad the input string with. Must
+     *                         be in the same charset like the input string.
+     * @param const $type      The padding type. One of STR_PAD_LEFT,
+     *                         STR_PAD_RIGHT, or STR_PAD_BOTH.
+     *
+     * @return string  The padded string.
+     */
+    function _str_pad($input, $length, $pad = ' ', $type = STR_PAD_RIGHT)
+    {
+        $mb_length = $this->_strlen($input);
+        $sb_length = strlen($input);
+        $pad_length = $this->_strlen($pad);
+
+        /* Return if we already have the length. */
+        if ($mb_length >= $length) {
+            return $input;
+        }
+
+        /* Shortcut for single byte strings. */
+        if ($mb_length == $sb_length && $pad_length == strlen($pad)) {
+            return str_pad($input, $length, $pad, $type);
+        }
+
+        switch ($type) {
+        case STR_PAD_LEFT:
+            $left = $length - $mb_length;
+            $output = $this->_substr(str_repeat($pad, ceil($left / $pad_length)), 0, $left, $this->_charset) . $input;
+            break;
+        case STR_PAD_BOTH:
+            $left = floor(($length - $mb_length) / 2);
+            $right = ceil(($length - $mb_length) / 2);
+            $output = $this->_substr(str_repeat($pad, ceil($left / $pad_length)), 0, $left, $this->_charset) .
+                $input .
+                $this->_substr(str_repeat($pad, ceil($right / $pad_length)), 0, $right, $this->_charset);
+            break;
+        case STR_PAD_RIGHT:
+            $right = $length - $mb_length;
+            $output = $input . $this->_substr(str_repeat($pad, ceil($right / $pad_length)), 0, $right, $this->_charset);
+            break;
+        }
+
+        return $output;
     }
 
 }
