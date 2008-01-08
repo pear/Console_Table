@@ -193,7 +193,10 @@ class Console_Table
      */
     function setCharset($charset)
     {
+        $locale = setlocale(LC_CTYPE, 0);
+        setlocale(LC_CTYPE, 'en_US');
         $this->_charset = strtolower($charset);
+        setlocale(LC_CTYPE, $locale);
     }
 
     /**
