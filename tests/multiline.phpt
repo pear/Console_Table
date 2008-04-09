@@ -6,7 +6,7 @@ Multiline table cells
 require_once dirname(__FILE__) . '/../Table.php';
 
 $data = array(
-    array('col1', 'col2', "col3\nmultiline", 'col4'),
+    array('col1', '0', "col3\nmultiline", 'col4'),
     array('r2col1', 'r2col2', "r2col3\nmultiline", 'r2col4'),
     array('r3col1', 'r3col2', "r3col3\nmultiline\r\nverymuch", 'r3col4'),
     array('r4col1', 'r4col2', "r4col3", 'r4col4'),
@@ -28,7 +28,7 @@ echo Console_Table::fromArray(array('one line header'),
 | h1        | h2     | h3        | h4     |
 | multiline |        |           |        |
 +-----------+--------+-----------+--------+
-| col1      | col2   | col3      | col4   |
+| col1      | 0      | col3      | col4   |
 |           |        | multiline |        |
 | r2col1    | r2col2 | r2col3    | r2col4 |
 |           |        | multiline |        |
