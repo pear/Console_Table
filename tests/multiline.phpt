@@ -3,7 +3,11 @@ Multiline table cells
 --FILE--
 <?php
 
-require_once dirname(__FILE__) . '/../Table.php';
+if (file_exists(dirname(__FILE__) . '/../Table.php')) {
+    require_once dirname(__FILE__) . '/../Table.php';
+} else {
+    require_once 'Console/Table.php';
+}
 
 $data = array(
     array('col1', '0', "col3\nmultiline", 'col4'),
