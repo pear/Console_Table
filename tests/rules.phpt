@@ -19,7 +19,20 @@ $table = new Console_Table();
 $table->setHeaders(array('foo', 'bar'));
 $table->addData($data);
 $table->addSeparator();
+echo $table->getTable();
+echo "=========================\n";
 
+$table = new Console_Table(CONSOLE_TABLE_ALIGN_LEFT, '');
+$table->setHeaders(array('foo', 'bar'));
+$table->addData($data);
+$table->addSeparator();
+echo $table->getTable();
+echo "=========================\n";
+
+$table = new Console_Table(CONSOLE_TABLE_ALIGN_LEFT, '#', 0);
+$table->setHeaders(array('foo', 'bar'));
+$table->addData($data);
+$table->addSeparator();
 echo $table->getTable();
 
 ?>
@@ -36,3 +49,22 @@ echo $table->getTable();
 | seven | eight |
 +-------+-------+
 +-------+-------+
+=========================
+ foo    bar   
+ one    two   
+ three  four  
+ five   six   
+ seven  eight 
+=========================
+#############
+#foo  #bar  #
+#############
+#one  #two  #
+#############
+#three#four #
+#############
+#############
+#five #six  #
+#seven#eight#
+#############
+#############

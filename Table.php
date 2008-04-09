@@ -43,6 +43,7 @@ define('CONSOLE_TABLE_HORIZONTAL_RULE', 1);
 define('CONSOLE_TABLE_ALIGN_LEFT', -1);
 define('CONSOLE_TABLE_ALIGN_CENTER', 0);
 define('CONSOLE_TABLE_ALIGN_RIGHT', 1);
+define('CONSOLE_TABLE_BORDER_ASCII', -1);
 
 class Console_Table
 {
@@ -131,13 +132,35 @@ class Console_Table
     var $_charset = 'utf-8';
 
     /**
+     * Border character
+     *
+     * @var string
+     */
+    var $_border = CONSOLE_TABLE_BORDER_ASCII;
+
+    /**
      * Constructor.
      *
-     * @param integer $align  Default alignment.
+     * @param integer $align    Default alignment. One of
+     *                          CONSOLE_TABLE_ALIGN_LEFT,
+     *                          CONSOLE_TABLE_ALIGN_CENTER or
+     *                          CONSOLE_TABLE_ALIGN_RIGHT.
+     * @param string $border    The character used for table borders or
+     *                          CONSOLE_TABLE_BORDER_ASCII.
+     * @param integer $padding  How many spaces to use to pad the table.
+     * @param string $charset   A charset supported by the mbstring PHP
+     *                          extension.
      */
-    function Console_Table($align = CONSOLE_TABLE_ALIGN_LEFT)
+    function Console_Table($align = CONSOLE_TABLE_ALIGN_LEFT,
+                           $border = CONSOLE_TABLE_BORDER_ASCII, $padding = 1,
+                           $charset = null)
     {
         $this->_defaultAlign = $align;
+        $this->_border = $border;
+        $this->_padding = $padding;
+        if (!empty($charset)) {
+            $this->setCharset($charset);
+        }
     }
 
     /**
@@ -189,7 +212,8 @@ class Console_Table
     /**
      * Sets the charset of the provided table data.
      *
-     * @string $charset  A charset supported by the mbstring PHP extension.
+     * @param string $charset  A charset supported by the mbstring PHP
+     *                         extension.
      */
     function setCharset($charset)
     {
@@ -381,7 +405,8 @@ class Console_Table
 
             foreach ($this->_data as $row_id => $row_data) {
                 if ($row_data !== CONSOLE_TABLE_HORIZONTAL_RULE) {
-                    $this->_data[$row_id][$column] = call_user_func($callback, $row_data[$column]);
+                    $this->_data[$row_id][$column] = call_user_func(
+                        $callback, $row_data[$column]);
                 }
             }
         }
@@ -456,7 +481,9 @@ class Console_Table
                     // columns that have less lines that the highest one.
                     for ($i2 = 0; $i2 < $height; $i2++) {
                         for ($j = 0; $j < $this->_max_cols; $j++) {
-                            $new_rows[$i2][$j] = empty($split[$j][$i2]) ? '' : $split[$j][$i2];
+                            $new_rows[$i2][$j] = !isset($split[$j][$i2])
+                                ? ''
+                                : $split[$j][$i2];
                         }
                     }
 
@@ -481,6 +508,11 @@ class Console_Table
      */
     function _buildTable()
     {
+        $rule = $this->_border == CONSOLE_TABLE_BORDER_ASCII
+            ? '|'
+            : $this->_border;
+        $separator = $this->_getSeparator();
+
         $return = array();
         for ($i = 0; $i < count($this->_data); $i++) {
             for ($j = 0; $j < count($this->_data[$i]); $j++) {
@@ -495,20 +527,23 @@ class Console_Table
             }
 
             if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
-                $row_begin = '|' . str_repeat(' ', $this->_padding);
-                $row_end = str_repeat(' ', $this->_padding) . '|';
-                $implode_char = str_repeat(' ', $this->_padding) . '|'
+                $row_begin = $rule . str_repeat(' ', $this->_padding);
+                $row_end = str_repeat(' ', $this->_padding) . $rule;
+                $implode_char = str_repeat(' ', $this->_padding) . $rule
                     . str_repeat(' ', $this->_padding);
                 $return[] = $row_begin
                     . implode($implode_char, $this->_data[$i]) . $row_end;
-            } else {
-                $return[] = $this->_getSeparator();
+            } elseif (!empty($separator)) {
+                $return[] = $separator;
             }
 
         }
 
-        $return = $this->_getSeparator() . "\r\n" . implode("\n", $return)
-            . "\r\n" . $this->_getSeparator() . "\r\n";
+        $return = implode("\r\n", $return);
+        if (!empty($separator)) {
+            $return = $separator . "\r\n" . $return . "\r\n" . $separator;
+        }
+        $return .= "\r\n";
 
         if (!empty($this->_headers)) {
             $return = $this->_getHeaderLine() .  "\r\n" . $return;
@@ -523,14 +558,25 @@ class Console_Table
      */
     function _getSeparator()
     {
-        foreach ($this->_cell_lengths as $cl) {
-            $return[] = str_repeat('-', $cl);
+        if (!$this->_border) {
+            return;
         }
 
-        $row_begin = '+' . str_repeat('-', $this->_padding);
-        $row_end = str_repeat('-', $this->_padding) . '+';
-        $implode_char = str_repeat('-', $this->_padding) . '+'
-            . str_repeat('-', $this->_padding);
+        if ($this->_border == CONSOLE_TABLE_BORDER_ASCII) {
+            $rule = '-';
+            $sect = '+';
+        } else {
+            $rule = $sect = $this->_border;
+        }
+
+        foreach ($this->_cell_lengths as $cl) {
+            $return[] = str_repeat($rule, $cl);
+        }
+
+        $row_begin = $sect . str_repeat($rule, $this->_padding);
+        $row_end = str_repeat($rule, $this->_padding) . $sect;
+        $implode_char = str_repeat($rule, $this->_padding) . $sect
+            . str_repeat($rule, $this->_padding);
 
         return $row_begin . implode($implode_char, $return) . $row_end;
     }
@@ -561,12 +607,18 @@ class Console_Table
             }
         }
 
-        $row_begin = '|' . str_repeat(' ', $this->_padding);
-        $row_end = str_repeat(' ', $this->_padding) . '|';
-        $implode_char = str_repeat(' ', $this->_padding) . '|'
+        $rule = $this->_border == CONSOLE_TABLE_BORDER_ASCII
+            ? '|'
+            : $this->_border;
+        $row_begin = $rule . str_repeat(' ', $this->_padding);
+        $row_end = str_repeat(' ', $this->_padding) . $rule;
+        $implode_char = str_repeat(' ', $this->_padding) . $rule
             . str_repeat(' ', $this->_padding);
 
-        $return[] = $this->_getSeparator();
+        $separator = $this->_getSeparator();
+        if (!empty($separator)) {
+            $return[] = $separator;
+        }
         for ($j = 0; $j < count($this->_headers); $j++) {
             $return[] = $row_begin
                 . implode($implode_char, $this->_headers[$j]) . $row_end;

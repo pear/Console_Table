@@ -6,7 +6,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <name>Console_Table</name>
  <channel>pear.php.net</channel>
  <summary>Class that makes it easy to build console style tables</summary>
- <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers.
+ <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers and with user defined table rules and padding.
  </description>
  <lead>
   <name>Jan Schneider</name>
@@ -32,17 +32,17 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>xnoguer@php.net</email>
   <active>no</active>
  </developer>
- <date>2008-01-09</date>
+ <date>2008-03-28</date>
  <version>
-  <release>1.0.8</release>
-  <api>1.0.0</api>
+  <release>1.1.1</release>
+  <api>1.1.0</api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
- <notes>* Fix cell padding with multibyte strings under certain circumstances (Bug #12853).</notes>
+ <notes>Fix rendering of multiline rows with cells that contain zeros (Bug #13629).</notes>
  <contents>
   <dir name="/" baseinstalldir="Console">
    <dir name="tests">
@@ -69,6 +69,33 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <date>2008-03-28</date>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Add option to set table border character.
+* Extend constructor to set table borders, padding, and charset on instantiation.</notes>
+  </release>
+  <release>
+   <date>2008-01-09</date>
+   <version>
+    <release>1.0.8</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>* Fix cell padding with multibyte strings under certain circumstances (Bug #12853).</notes>
+  </release>
   <release>
    <date>2007-05-17</date>
    <version>
