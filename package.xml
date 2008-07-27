@@ -6,8 +6,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <name>Console_Table</name>
  <channel>pear.php.net</channel>
  <summary>Class that makes it easy to build console style tables</summary>
- <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers and with user defined table rules and padding.
- </description>
+ <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers and with user defined table rules and padding.</description>
  <lead>
   <name>Jan Schneider</name>
   <user>yunosh</user>
@@ -32,9 +31,9 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>xnoguer@php.net</email>
   <active>no</active>
  </developer>
- <date>2008-04-09</date>
+ <date>2008-07-27</date>
  <version>
-  <release>1.1.1</release>
+  <release>1.1.2</release>
   <api>1.1.0</api>
  </version>
  <stability>
@@ -42,7 +41,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
- <notes>Fix rendering of multiline rows with cells that contain zeros (Bug #13629).</notes>
+ <notes>Don't render anything if no data has been provided (Bug #14405).</notes>
  <contents>
   <dir name="/" baseinstalldir="Console">
    <dir name="tests">
@@ -69,6 +68,19 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <date>2008-04-09</date>
+   <version>
+    <release>1.1.1</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>Fix rendering of multiline rows with cells that contain zeros (Bug #13629).</notes>
+  </release>
   <release>
    <date>2008-03-28</date>
    <version>

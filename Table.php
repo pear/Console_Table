@@ -508,6 +508,10 @@ class Console_Table
      */
     function _buildTable()
     {
+        if (!count($this->_data)) {
+            return '';
+        }
+
         $rule = $this->_border == CONSOLE_TABLE_BORDER_ASCII
             ? '|'
             : $this->_border;
@@ -569,6 +573,7 @@ class Console_Table
             $rule = $sect = $this->_border;
         }
 
+        $return = array();
         foreach ($this->_cell_lengths as $cl) {
             $return[] = str_repeat($rule, $cl);
         }

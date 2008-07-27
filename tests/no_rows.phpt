@@ -11,7 +11,9 @@ if (file_exists(dirname(__FILE__) . '/../Table.php')) {
 
 $table = new Console_Table();
 $table->setHeaders(array('foo', 'bar'));
+echo $table->getTable();
 
+$table = new Console_Table();
 echo $table->getTable();
 
 ?>
