@@ -132,11 +132,18 @@ class Console_Table
     var $_charset = 'utf-8';
 
     /**
-     * Border character
+     * Border character.
      *
      * @var string
      */
     var $_border = CONSOLE_TABLE_BORDER_ASCII;
+
+    /**
+     * Whether the data has ANSI colors.
+     *
+     * @var boolean
+     */
+    var $_ansiColor = false;
 
     /**
      * Constructor.
@@ -150,14 +157,16 @@ class Console_Table
      * @param integer $padding  How many spaces to use to pad the table.
      * @param string $charset   A charset supported by the mbstring PHP
      *                          extension.
+     * @param boolean $color    Whether the data contains ansi color codes.
      */
     function Console_Table($align = CONSOLE_TABLE_ALIGN_LEFT,
                            $border = CONSOLE_TABLE_BORDER_ASCII, $padding = 1,
-                           $charset = null)
+                           $charset = null, $color = false)
     {
         $this->_defaultAlign = $align;
         $this->_border = $border;
         $this->_padding = $padding;
+        $this->_ansiColor = $color;
         if (!empty($charset)) {
             $this->setCharset($charset);
         }
@@ -713,6 +722,12 @@ class Console_Table
     function _strlen($str)
     {
         static $mbstring, $utf8;
+
+        // Strip ANSI color codes if requested.
+        if ($this->_ansiColor) {
+            require_once 'Console/Color.php';
+            $str = Console_Color::strip($str);
+        }
 
         // Cache expensive function_exists() calls.
         if (!isset($mbstring)) {
