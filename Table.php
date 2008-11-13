@@ -177,6 +177,9 @@ class Console_Table
         $this->_border       = $border;
         $this->_padding      = $padding;
         $this->_ansiColor    = $color;
+        if ($this->_ansiColor) {
+            include_once 'Console/Color.php';
+        }
         if (!empty($charset)) {
             $this->setCharset($charset);
         }
@@ -778,7 +781,6 @@ class Console_Table
 
         // Strip ANSI color codes if requested.
         if ($this->_ansiColor) {
-            include_once 'Console/Color.php';
             $str = Console_Color::strip($str);
         }
 
