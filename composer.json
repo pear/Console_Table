@@ -2,7 +2,7 @@
     "name": "pear/Console_Table",
     "type": "library",
     "description": "Class that makes it easy to build console style tables.",
-    "keywords": [ "console", "pear" ],
+    "keywords": [ "console" ],
     "homepage": "http://pear.php.net/package/Console_Table/",
     "license": "BSD",
     "authors": [
