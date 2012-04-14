@@ -30,6 +30,6 @@
         "pear/Console_Color": ">=0.0.4"
     },
     "autoload": {
-        "classmap": { "Console_Table": "" }
+        "classmap": [ "Table.php" ]
     }
 }
