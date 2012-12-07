@@ -777,7 +777,7 @@ class Console_Table
      */
     function _strlen($str)
     {
-        static $mbstring, $utf8;
+        static $mbstring;
 
         // Strip ANSI color codes if requested.
         if ($this->_ansiColor) {
@@ -786,19 +786,11 @@ class Console_Table
 
         // Cache expensive function_exists() calls.
         if (!isset($mbstring)) {
-            $mbstring = function_exists('mb_strlen');
-        }
-        if (!isset($utf8)) {
-            $utf8 = function_exists('utf8_decode');
+            $mbstring = function_exists('mb_strwidth');
         }
 
-        if ($utf8 &&
-            ($this->_charset == strtolower('utf-8') ||
-             $this->_charset == strtolower('utf8'))) {
-            return strlen(utf8_decode($str));
-        }
         if ($mbstring) {
-            return mb_strlen($str, $this->_charset);
+            return mb_strwidth($str, $this->_charset);
         }
 
         return strlen($str);

@@ -28,10 +28,10 @@
   <email>xnoguer@php.net</email>
   <active>no</active>
  </developer>
- <date>2010-10-25</date>
- <time>23:30:07</time>
+ <date>2012-12-07</date>
+ <time>15:40:45</time>
  <version>
-  <release>1.1.4</release>
+  <release>1.1.5</release>
   <api>1.1.1</api>
  </version>
  <stability>
@@ -40,10 +40,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-Automatically built QA release
-Req #14835 Add Console_Color support - yunosh
-
-Doc #15006 Console_table docs are totally worthless - cweiske
+Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
  </notes>
  <contents>
   <dir baseinstalldir="Console" name="/">
@@ -75,7 +72,7 @@ Doc #15006 Console_table docs are totally worthless - cweiske
    </package>
   </optional>
  </dependencies>
- <phprelease />
+ <phprelease/>
  <changelog>
   <release>
    <version>
@@ -309,6 +306,22 @@ Automatically built QA release
 Req #14835 Add Console_Color support - yunosh
 
 Doc #15006 Console_table docs are totally worthless - cweiske
+   </notes>
+  </release>
+  <release>
+   <date>2012-12-07</date>
+   <time>23:30:07</time>
+   <version>
+    <release>1.1.5</release>
+    <api>1.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
    </notes>
   </release>
  </changelog>
