@@ -595,7 +595,12 @@ class Console_Table
 
         }
 
-        $return = implode("\r\n", $return);
+        if (!stristr(PHP_OS, 'WIN')) {
+            $return = implode("\r\n", $return);
+        }
+        else {
+            $return = implode("\n", $return);
+        }
         if (!empty($separator)) {
             $return = $separator . "\r\n" . $return . "\r\n" . $separator;
         }
