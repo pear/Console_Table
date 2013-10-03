@@ -599,8 +599,10 @@ class Console_Table
         if (!empty($separator)) {
             $return = $separator . "\r\n" . $return . "\r\n" . $separator;
         }
-        $return .= "\r\n";
 
+        if (!stristr(PHP_OS, 'WIN')) {
+            $return .= "\r\n";
+        }
         if (!empty($this->_headers)) {
             $return = $this->_getHeaderLine() .  "\r\n" . $return;
         }
