@@ -28,10 +28,9 @@
   <email>xnoguer@php.net</email>
   <active>no</active>
  </developer>
- <date>2012-12-07</date>
- <time>15:40:45</time>
+ <date>2013-10-12</date>
  <version>
-  <release>1.1.5</release>
+  <release>1.1.6</release>
   <api>1.1.1</api>
  </version>
  <stability>
@@ -40,7 +39,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
+Use line breaks dependent on the current operating system.
  </notes>
  <contents>
   <dir baseinstalldir="Console" name="/">
@@ -58,7 +57,7 @@ Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte stri
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>4.3.10</min>
    </php>
    <pearinstaller>
     <min>1.4.0b1</min>
@@ -322,6 +321,21 @@ Doc #15006 Console_table docs are totally worthless - cweiske
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
+   </notes>
+  </release>
+  <release>
+   <date>2013-10-12</date>
+   <version>
+    <release>1.1.6</release>
+    <api>1.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+Use line breaks dependent on the current operating system.
    </notes>
   </release>
  </changelog>

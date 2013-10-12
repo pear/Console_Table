@@ -595,14 +595,14 @@ class Console_Table
 
         }
 
-        $return = implode("\r\n", $return);
+        $return = implode(PHP_EOL, $return);
         if (!empty($separator)) {
-            $return = $separator . "\r\n" . $return . "\r\n" . $separator;
+            $return = $separator . PHP_EOL . $return . PHP_EOL . $separator;
         }
-        $return .= "\r\n";
+        $return .= PHP_EOL;
 
         if (!empty($this->_headers)) {
-            $return = $this->_getHeaderLine() .  "\r\n" . $return;
+            $return = $this->_getHeaderLine() .  PHP_EOL . $return;
         }
 
         return $return;
@@ -686,7 +686,7 @@ class Console_Table
                 . implode($implode_char, $this->_headers[$j]) . $row_end;
         }
 
-        return implode("\r\n", $return);
+        return implode(PHP_EOL, $return);
     }
 
     /**
