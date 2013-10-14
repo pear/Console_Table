@@ -335,7 +335,7 @@ Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte stri
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Use line breaks dependent on the current operating system.
+Use line breaks dependent on the current operating system (Bug #20092).
    </notes>
   </release>
  </changelog>
