@@ -142,11 +142,19 @@ class Console_Table
     var $_charset = 'utf-8';
 
     /**
-     * Border character.
+     * Border characters.
+     * Allowed keys:
+     * - sect - intersection ("+")
+     * - rule - ruler, horizontal character ("-")
+     * - vert - vertical character ("|")
      *
-     * @var string
+     * @var array
      */
-    var $_border = CONSOLE_TABLE_BORDER_ASCII;
+    var $_border = array(
+        'sect' => '+',
+        'rule' => '-',
+        'vert' => '|',
+    );
 
     /**
      * Whether the data has ANSI colors.
@@ -174,7 +182,7 @@ class Console_Table
                            $charset = null, $color = false)
     {
         $this->_defaultAlign = $align;
-        $this->_border       = $border;
+        $this->setBorder($border);
         $this->_padding      = $padding;
         $this->_ansiColor    = $color;
         if ($this->_ansiColor) {
@@ -247,6 +255,41 @@ class Console_Table
         setlocale(LC_CTYPE, 'en_US');
         $this->_charset = strtolower($charset);
         setlocale(LC_CTYPE, $locale);
+    }
+
+    /**
+     * Set the table border settings
+     *
+     * Border definition modes:
+     * - CONSOLE_TABLE_BORDER_ASCII: Default border with +, - and |
+     * - array with keys "sect" (intersection), "rule" (horizontal) and "vert"
+     *   (vertical character)
+     * - single character string that sets all three of the array keys
+     *
+     * @param mixed $border Border definition
+     *
+     * @return void
+     * @see $_border
+     */
+    function setBorder($border)
+    {
+        if ($border === CONSOLE_TABLE_BORDER_ASCII) {
+            $sect = '+';
+            $rule = '-';
+            $vert = '|';
+        } else if (is_string($border)) {
+            $sect = $rule = $vert = $border;
+        } else if ($border == '') {
+            $sect = $rule = $vert = '';
+        } else {
+            extract($border);
+        }
+
+        $this->_border = array(
+            'sect' => $sect,
+            'rule' => $rule,
+            'vert' => $vert,
+        );
     }
 
     /**
@@ -564,9 +607,7 @@ class Console_Table
             return '';
         }
 
-        $rule      = $this->_border == CONSOLE_TABLE_BORDER_ASCII
-            ? '|'
-            : $this->_border;
+        $vert = $this->_border['vert'];
         $separator = $this->_getSeparator();
 
         $return = array();
@@ -583,9 +624,9 @@ class Console_Table
             }
 
             if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
-                $row_begin    = $rule . str_repeat(' ', $this->_padding);
-                $row_end      = str_repeat(' ', $this->_padding) . $rule;
-                $implode_char = str_repeat(' ', $this->_padding) . $rule
+                $row_begin    = $vert . str_repeat(' ', $this->_padding);
+                $row_end      = str_repeat(' ', $this->_padding) . $vert;
+                $implode_char = str_repeat(' ', $this->_padding) . $vert
                     . str_repeat(' ', $this->_padding);
                 $return[]     = $row_begin
                     . implode($implode_char, $this->_data[$i]) . $row_end;
@@ -620,12 +661,8 @@ class Console_Table
             return;
         }
 
-        if ($this->_border == CONSOLE_TABLE_BORDER_ASCII) {
-            $rule = '-';
-            $sect = '+';
-        } else {
-            $rule = $sect = $this->_border;
-        }
+        $rule = $this->_border['rule'];
+        $sect = $this->_border['sect'];
 
         $return = array();
         foreach ($this->_cell_lengths as $cl) {
@@ -669,12 +706,10 @@ class Console_Table
             }
         }
 
-        $rule         = $this->_border == CONSOLE_TABLE_BORDER_ASCII
-            ? '|'
-            : $this->_border;
-        $row_begin    = $rule . str_repeat(' ', $this->_padding);
-        $row_end      = str_repeat(' ', $this->_padding) . $rule;
-        $implode_char = str_repeat(' ', $this->_padding) . $rule
+        $vert = $this->_border['vert'];
+        $row_begin    = $vert . str_repeat(' ', $this->_padding);
+        $row_end      = str_repeat(' ', $this->_padding) . $vert;
+        $implode_char = str_repeat(' ', $this->_padding) . $vert
             . str_repeat(' ', $this->_padding);
 
         $separator = $this->_getSeparator();
