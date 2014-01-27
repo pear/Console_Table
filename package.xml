@@ -65,9 +65,9 @@ Use line breaks dependent on the current operating system.
   </required>
   <optional>
    <package>
-    <name>Console_Color</name>
+    <name>Console_Color2</name>
     <channel>pear.php.net</channel>
-    <min>0.0.4</min>
+    <min>0.1.2</min>
    </package>
   </optional>
  </dependencies>
