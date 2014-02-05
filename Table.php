@@ -151,7 +151,7 @@ class Console_Table
     /**
      * Whether the data has ANSI colors.
      *
-     * @var boolean
+     * @var Console_Color2
      */
     var $_ansiColor = false;
 
@@ -176,9 +176,9 @@ class Console_Table
         $this->_defaultAlign = $align;
         $this->_border       = $border;
         $this->_padding      = $padding;
-        $this->_ansiColor    = $color;
-        if ($this->_ansiColor) {
-            include_once 'Console/Color.php';
+        if ($color) {
+            include_once 'Console/Color2.php';
+            $this->_ansiColor = new Console_Color2();
         }
         if (!empty($charset)) {
             $this->setCharset($charset);
@@ -781,7 +781,7 @@ class Console_Table
 
         // Strip ANSI color codes if requested.
         if ($this->_ansiColor) {
-            $str = Console_Color::strip($str);
+            $str = $this->_ansiColor->strip($str);
         }
 
         // Cache expensive function_exists() calls.
