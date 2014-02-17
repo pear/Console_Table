@@ -30,7 +30,7 @@
  </developer>
  <date>2013-10-12</date>
  <version>
-  <release>1.1.6</release>
+  <release>1.1.7</release>
   <api>1.1.1</api>
  </version>
  <stability>
@@ -39,7 +39,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-Use line breaks dependent on the current operating system.
+* Use Console_Color2 to avoid notices from PHP 4 code (Christian Weiske, Bug #20188)
  </notes>
  <contents>
   <dir baseinstalldir="Console" name="/">
@@ -336,6 +336,21 @@ Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte stri
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 Use line breaks dependent on the current operating system (Bug #20092).
+   </notes>
+  </release>
+  <release>
+   <date>2014-02-17</date>
+   <version>
+    <release>1.1.7</release>
+    <api>1.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+* Use Console_Color2 to avoid notices from PHP 4 code (Christian Weiske, Bug #20188)
    </notes>
   </release>
  </changelog>
