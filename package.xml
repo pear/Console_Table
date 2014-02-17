@@ -39,6 +39,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
+* Fix notice when using setAlign() on other than first column (Christian Weiske, Bug #20181).
 * Use Console_Color2 to avoid notices from PHP 4 code (Christian Weiske, Bug #20188)
  </notes>
  <contents>
