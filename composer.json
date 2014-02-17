@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Class that makes it easy to build console style tables.",
     "keywords": [ "console" ],
-    "homepage": "https://github.com/pear/Console_Table",
+    "homepage": "http://pear.php.net/package/Console_Table/",
     "license": "BSD",
     "authors": [
         {
@@ -24,10 +24,10 @@
         }
     ],
     "require": {
-        "php": ">=4.0.0"
+        "php": ">=4.3.10"
     },
     "suggest": {
-        "pear/Console_Color": ">=0.0.4"
+        "pear/Console_Color2": ">=0.1.2"
     },
     "autoload": {
         "classmap": [ "Table.php" ]
