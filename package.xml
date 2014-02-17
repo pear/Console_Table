@@ -2,8 +2,8 @@
 <package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Console_Table</name>
  <channel>pear.php.net</channel>
- <summary>Class that makes it easy to build console style tables</summary>
- <description>Provides methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers and with user defined table rules and padding.</description>
+ <summary>Library that makes it easy to build console style tables</summary>
+ <description>Provides a Console_Table class with methods such as addRow(), insertRow(), addCol() etc. to build console tables with or without headers and with user defined table rules, padding, and alignment.</description>
  <lead>
   <name>Jan Schneider</name>
   <user>yunosh</user>
