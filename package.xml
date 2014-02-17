@@ -85,7 +85,7 @@
    <date>2002-09-02</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Initial release
+* Initial release.
    </notes>
   </release>
   <release>
@@ -100,7 +100,7 @@ Initial release
    <date>2003-01-24</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Removed a few options and added addData() method
+* Removed a few options and added addData() method.
    </notes>
   </release>
   <release>
@@ -115,7 +115,7 @@ Removed a few options and added addData() method
    <date>2003-03-03</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Fixed a caching bug
+* Fixed a caching bug.
    </notes>
   </release>
   <release>
@@ -130,7 +130,7 @@ Fixed a caching bug
    <date>2005-07-16</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Added support for column alignment. Patch from Michael Richter
+* Added support for column alignment (Michael Richter).
    </notes>
   </release>
   <release>
@@ -145,10 +145,10 @@ Added support for column alignment. Patch from Michael Richter
    <date>2006-03-13</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-* Fix cell width calculation if setting header with associative array (Bug 4299).
-*   Fix fatal reference error with some PHP versions (Bug 5309).
-*   Fix notice if no data has been provided (Bug 5851).
-*   Added multibyte support (Requests 2934 and 7014).
+* Fix cell width calculation if setting header with associative array (Bug #4299).
+* Fix fatal reference error with some PHP versions (Bug #5309).
+* Fix notice if no data has been provided (Bug #5851).
+* Added multibyte support (Requests #2934, Request #7014).
    </notes>
   </release>
   <release>
@@ -179,7 +179,7 @@ Added support for column alignment. Patch from Michael Richter
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 * Allow to specify separator rules in addData().
-  * Fix warnings when combining separator rules and callback filters (Bug #8566).
+* Fix warnings when combining separator rules and callback filters (Bug #8566).
    </notes>
   </release>
   <release>
@@ -256,7 +256,7 @@ Added support for column alignment. Patch from Michael Richter
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Fix rendering of multiline rows with cells that contain zeros (Bug #13629).
+* Fix rendering of multiline rows with cells that contain zeros (Bug #13629).
    </notes>
   </release>
   <release>
@@ -271,7 +271,7 @@ Fix rendering of multiline rows with cells that contain zeros (Bug #13629).
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Don&apos;t render anything if no data has been provided (Bug #14405).
+* Don&apos;t render anything if no data has been provided (Bug #14405).
    </notes>
   </release>
   <release>
@@ -286,7 +286,7 @@ Don&apos;t render anything if no data has been provided (Bug #14405).
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Add option to render data with ANSI color codes (Igor Feghali, Request #14835).
+* Add option to render data with ANSI color codes (Igor Feghali, Request #14835).
    </notes>
   </release>
   <release>
@@ -301,10 +301,10 @@ Add option to render data with ANSI color codes (Igor Feghali, Request #14835).
    <date>2010-10-25</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Automatically built QA release
-Req #14835 Add Console_Color support - yunosh
+* Automatically built QA release.
+* Add Console_Color support (Request #14835).
 
-Doc #15006 Console_table docs are totally worthless - cweiske
+* Improve documentation (Christian Weiske, Bug #15006).
    </notes>
   </release>
   <release>
@@ -320,7 +320,7 @@ Doc #15006 Console_table docs are totally worthless - cweiske
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
+* Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte strings (Bug #19423).
    </notes>
   </release>
   <release>
@@ -335,7 +335,7 @@ Use mb_strwidth() instead of mb_strlen() to determine lengths of multi-byte stri
    </stability>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
-Use line breaks dependent on the current operating system (Bug #20092).
+* Use line breaks dependent on the current operating system (Bug #20092).
    </notes>
   </release>
   <release>
