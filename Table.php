@@ -157,6 +157,20 @@ class Console_Table
     );
 
     /**
+     * If borders are shown or not
+     * Allowed keys: top, right, bottom, left, inner: true and false
+     *
+     * @var array
+     */
+    var $_borderVisibility = array(
+        'top'    => true,
+        'right'  => true,
+        'bottom' => true,
+        'left'   => true,
+        'inner'  => true
+    );
+
+    /**
      * Whether the data has ANSI colors.
      *
      * @var Console_Color2
@@ -288,6 +302,26 @@ class Console_Table
             'intersection' => $intersection,
             'horizontal' => $horizontal,
             'vertical' => $vertical,
+        );
+    }
+
+    /**
+     * Set which borders shall be shown.
+     *
+     * @param array $visibility Visibility settings.
+     *                          Allowed keys: left, right, top, bottom, inner
+     *
+     * @return void
+     * @see    $_borderVisibility
+     */
+    function setBorderVisibility($visibility)
+    {
+        $this->_borderVisibility = array_merge(
+            $this->_borderVisibility,
+            array_intersect_key(
+                $visibility,
+                $this->_borderVisibility
+            )
         );
     }
 
@@ -623,8 +657,12 @@ class Console_Table
             }
 
             if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
-                $row_begin    = $vertical . str_repeat(' ', $this->_padding);
-                $row_end      = str_repeat(' ', $this->_padding) . $vertical;
+                $row_begin = $this->_borderVisibility['left']
+                    ? $vertical . str_repeat(' ', $this->_padding)
+                    : '';
+                $row_end = $this->_borderVisibility['right']
+                    ? str_repeat(' ', $this->_padding) . $vertical
+                    : '';
                 $implode_char = str_repeat(' ', $this->_padding) . $vertical
                     . str_repeat(' ', $this->_padding);
                 $return[]     = $row_begin
@@ -637,7 +675,12 @@ class Console_Table
 
         $return = implode(PHP_EOL, $return);
         if (!empty($separator)) {
-            $return = $separator . PHP_EOL . $return . PHP_EOL . $separator;
+            if ($this->_borderVisibility['inner']) {
+                $return = $separator . PHP_EOL . $return;
+            }
+            if ($this->_borderVisibility['bottom']) {
+                $return .= PHP_EOL . $separator;
+            }
         }
         $return .= PHP_EOL;
 
@@ -668,8 +711,12 @@ class Console_Table
             $return[] = str_repeat($horizontal, $cl);
         }
 
-        $row_begin    = $intersection . str_repeat($horizontal, $this->_padding);
-        $row_end      = str_repeat($horizontal, $this->_padding) . $intersection;
+        $row_begin = $this->_borderVisibility['left']
+            ? $intersection . str_repeat($horizontal, $this->_padding)
+            : '';
+        $row_end = $this->_borderVisibility['right']
+            ? str_repeat($horizontal, $this->_padding) . $intersection
+            : '';
         $implode_char = str_repeat($horizontal, $this->_padding) . $intersection
             . str_repeat($horizontal, $this->_padding);
 
@@ -706,13 +753,17 @@ class Console_Table
         }
 
         $vertical = $this->_border['vertical'];
-        $row_begin    = $vertical . str_repeat(' ', $this->_padding);
-        $row_end      = str_repeat(' ', $this->_padding) . $vertical;
+        $row_begin = $this->_borderVisibility['left']
+            ? $vertical . str_repeat(' ', $this->_padding)
+            : '';
+        $row_end = $this->_borderVisibility['right']
+            ? str_repeat(' ', $this->_padding) . $vertical
+            : '';
         $implode_char = str_repeat(' ', $this->_padding) . $vertical
             . str_repeat(' ', $this->_padding);
 
         $separator = $this->_getSeparator();
-        if (!empty($separator)) {
+        if (!empty($separator) && $this->_borderVisibility['top']) {
             $return[] = $separator;
         }
         for ($j = 0; $j < count($this->_headers); $j++) {
