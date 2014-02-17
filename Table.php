@@ -144,16 +144,16 @@ class Console_Table
     /**
      * Border characters.
      * Allowed keys:
-     * - sect - intersection ("+")
-     * - rule - ruler, horizontal character ("-")
-     * - vert - vertical character ("|")
+     * - intersection - intersection ("+")
+     * - horizontal - horizontal rule character ("-")
+     * - vertical - vertical rule character ("|")
      *
      * @var array
      */
     var $_border = array(
-        'sect' => '+',
-        'rule' => '-',
-        'vert' => '|',
+        'intersection' => '+',
+        'horizontal' => '-',
+        'vertical' => '|',
     );
 
     /**
@@ -262,8 +262,7 @@ class Console_Table
      *
      * Border definition modes:
      * - CONSOLE_TABLE_BORDER_ASCII: Default border with +, - and |
-     * - array with keys "sect" (intersection), "rule" (horizontal) and "vert"
-     *   (vertical character)
+     * - array with keys "intersection", "horizontal" and "vertical"
      * - single character string that sets all three of the array keys
      *
      * @param mixed $border Border definition
@@ -274,21 +273,21 @@ class Console_Table
     function setBorder($border)
     {
         if ($border === CONSOLE_TABLE_BORDER_ASCII) {
-            $sect = '+';
-            $rule = '-';
-            $vert = '|';
+            $intersection = '+';
+            $horizontal = '-';
+            $vertical = '|';
         } else if (is_string($border)) {
-            $sect = $rule = $vert = $border;
+            $intersection = $horizontal = $vertical = $border;
         } else if ($border == '') {
-            $sect = $rule = $vert = '';
+            $intersection = $horizontal = $vertical = '';
         } else {
             extract($border);
         }
 
         $this->_border = array(
-            'sect' => $sect,
-            'rule' => $rule,
-            'vert' => $vert,
+            'intersection' => $intersection,
+            'horizontal' => $horizontal,
+            'vertical' => $vertical,
         );
     }
 
@@ -607,7 +606,7 @@ class Console_Table
             return '';
         }
 
-        $vert = $this->_border['vert'];
+        $vertical = $this->_border['vertical'];
         $separator = $this->_getSeparator();
 
         $return = array();
@@ -624,9 +623,9 @@ class Console_Table
             }
 
             if ($this->_data[$i] !== CONSOLE_TABLE_HORIZONTAL_RULE) {
-                $row_begin    = $vert . str_repeat(' ', $this->_padding);
-                $row_end      = str_repeat(' ', $this->_padding) . $vert;
-                $implode_char = str_repeat(' ', $this->_padding) . $vert
+                $row_begin    = $vertical . str_repeat(' ', $this->_padding);
+                $row_end      = str_repeat(' ', $this->_padding) . $vertical;
+                $implode_char = str_repeat(' ', $this->_padding) . $vertical
                     . str_repeat(' ', $this->_padding);
                 $return[]     = $row_begin
                     . implode($implode_char, $this->_data[$i]) . $row_end;
@@ -661,18 +660,18 @@ class Console_Table
             return;
         }
 
-        $rule = $this->_border['rule'];
-        $sect = $this->_border['sect'];
+        $horizontal = $this->_border['horizontal'];
+        $intersection = $this->_border['intersection'];
 
         $return = array();
         foreach ($this->_cell_lengths as $cl) {
-            $return[] = str_repeat($rule, $cl);
+            $return[] = str_repeat($horizontal, $cl);
         }
 
-        $row_begin    = $sect . str_repeat($rule, $this->_padding);
-        $row_end      = str_repeat($rule, $this->_padding) . $sect;
-        $implode_char = str_repeat($rule, $this->_padding) . $sect
-            . str_repeat($rule, $this->_padding);
+        $row_begin    = $intersection . str_repeat($horizontal, $this->_padding);
+        $row_end      = str_repeat($horizontal, $this->_padding) . $intersection;
+        $implode_char = str_repeat($horizontal, $this->_padding) . $intersection
+            . str_repeat($horizontal, $this->_padding);
 
         return $row_begin . implode($implode_char, $return) . $row_end;
     }
@@ -706,10 +705,10 @@ class Console_Table
             }
         }
 
-        $vert = $this->_border['vert'];
-        $row_begin    = $vert . str_repeat(' ', $this->_padding);
-        $row_end      = str_repeat(' ', $this->_padding) . $vert;
-        $implode_char = str_repeat(' ', $this->_padding) . $vert
+        $vertical = $this->_border['vertical'];
+        $row_begin    = $vertical . str_repeat(' ', $this->_padding);
+        $row_end      = str_repeat(' ', $this->_padding) . $vertical;
+        $implode_char = str_repeat(' ', $this->_padding) . $vertical
             . str_repeat(' ', $this->_padding);
 
         $separator = $this->_getSeparator();

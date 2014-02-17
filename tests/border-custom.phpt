@@ -10,7 +10,7 @@ if (file_exists(dirname(__FILE__) . '/../Table.php')) {
 }
 $table = new Console_Table(
     CONSOLE_TABLE_ALIGN_LEFT,
-    array('rule' => '=', 'vert' => ':', 'sect' => '*')
+    array('horizontal' => '=', 'vertical' => ':', 'intersection' => '*')
 );
 $table->setHeaders(array('City', 'Mayor'));
 $table->addRow(array('Leipzig', 'Major Tom'));
