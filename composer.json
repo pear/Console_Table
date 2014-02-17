@@ -2,7 +2,9 @@
     "name": "pear/console_table",
     "type": "library",
     "description": "Class that makes it easy to build console style tables.",
-    "keywords": [ "console" ],
+    "keywords": [
+        "console"
+    ],
     "homepage": "http://pear.php.net/package/Console_Table/",
     "license": "BSD",
     "authors": [
@@ -24,12 +26,22 @@
         }
     ],
     "require": {
-        "php": ">=4.3.10"
+        "php": ">=4.3.10",
+        "pear/pear_exception": "*"
     },
     "suggest": {
         "pear/Console_Color2": ">=0.1.2"
     },
     "autoload": {
-        "classmap": [ "Table.php" ]
+        "classmap": [
+            "Table.php"
+        ]
+    },
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Table",
+        "source": "https://github.com/pear/Console_Table"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
     }
 }
