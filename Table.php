@@ -719,8 +719,10 @@ class Console_Table
         }
 
         // Set default column alignments
-        for ($i = count($this->_col_align); $i < $this->_max_cols; $i++) {
-            $this->_col_align[$i] = $pad;
+        for ($i = 0; $i < $this->_max_cols; $i++) {
+            if (!isset($this->_col_align[$i])) {
+                $this->_col_align[$i] = $pad;
+            }
         }
     }
 
