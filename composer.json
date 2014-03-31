@@ -6,7 +6,7 @@
         "console"
     ],
     "homepage": "http://pear.php.net/package/Console_Table/",
-    "license": "BSD",
+    "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Jan Schneider",
@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": ">=4.3.10",
+        "php": ">=4.3.10"
     },
     "suggest": {
         "pear/Console_Color2": ">=0.1.2"
@@ -39,5 +39,5 @@
     "support": {
         "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Console_Table",
         "source": "https://github.com/pear/Console_Table"
-    },
+    }
 }
