@@ -199,7 +199,7 @@ class Console_Table
         $this->setBorder($border);
         $this->_padding      = $padding;
         if ($color) {
-            if(!class_exists(Console_Color2)) {
+            if (!class_exists(Console_Color2)) {
                 include_once 'Console/Color2.php';
             }
             $this->_ansiColor = new Console_Color2();
