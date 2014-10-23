@@ -26,9 +26,7 @@
         }
     ],
     "require": {
-        "php": ">=4.3.10"
-    },
-    "suggest": {
+        "php": ">=4.3.10",
         "pear/Console_Color2": ">=0.1.2"
     },
     "autoload": {

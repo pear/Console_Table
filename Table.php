@@ -199,7 +199,6 @@ class Console_Table
         $this->setBorder($border);
         $this->_padding      = $padding;
         if ($color) {
-            include_once 'Console/Color2.php';
             $this->_ansiColor = new Console_Color2();
         }
         if (!empty($charset)) {
