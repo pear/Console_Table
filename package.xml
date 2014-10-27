@@ -28,9 +28,9 @@
   <email>xnoguer@php.net</email>
   <active>no</active>
  </developer>
- <date>2014-02-17</date>
+ <date>2014-10-27</date>
  <version>
-  <release>1.2.0</release>
+  <release>1.2.1</release>
   <api>1.2.0</api>
  </version>
  <stability>
@@ -39,10 +39,9 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-* Make border visibility configurable (Christian Weiske, Request #20186).
-* Allow to customize all border characters (Christian Weiske, Request #20182).
-* Fix notice when using setAlign() on other than first column (Christian Weiske, Bug #20181).
-* Use Console_Color2 to avoid notices from PHP 4 code (Christian Weiske, Bug #20188)
+* Add travis configuration (Christian Weiske).
+* Try to autoload Console_Color2 first (Jurgen Rutten, PR #11).
+* Fix Composer definition syntax (Rob Loach, PR #9).
  </notes>
  <contents>
   <dir baseinstalldir="Console" name="/">
@@ -357,6 +356,23 @@
 * Allow to customize all border characters (Christian Weiske, Request #20182).
 * Fix notice when using setAlign() on other than first column (Christian Weiske, Bug #20181).
 * Use Console_Color2 to avoid notices from PHP 4 code (Christian Weiske, Bug #20188)
+   </notes>
+  </release>
+  <release>
+   <date>2014-10-27</date>
+   <version>
+    <release>1.2.1</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+* Add travis configuration (Christian Weiske).
+* Try to autoload Console_Color2 first (Jurgen Rutten, PR #11).
+* Fix Composer definition syntax (Rob Loach, PR #9).
    </notes>
   </release>
  </changelog>
