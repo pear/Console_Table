@@ -47,6 +47,13 @@
   <dir baseinstalldir="Console" name="/">
    <dir name="tests">
     <file name="assoziative_arrays.phpt" role="test" />
+    <file name="border-ascii.phpt" role="test" />
+    <file name="border-custom.phpt" role="test" />
+    <file name="border-custom2.phpt" role="test" />
+    <file name="border-disable.phpt" role="test" />
+    <file name="border-dot.phpt" role="test" />
+    <file name="border-empty.phpt" role="test" />
+    <file name="bug20181.phpt" role="test" />
     <file name="colors.phpt" role="test" />
     <file name="filters.phpt" role="test" />
     <file name="multibyte.phpt" role="test" />
