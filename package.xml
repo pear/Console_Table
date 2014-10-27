@@ -93,7 +93,7 @@
   <release>
    <version>
     <release>1.0</release>
-    <api>1.0.1</api>
+    <api>1.0.0</api>
    </version>
    <stability>
     <release>stable</release>
