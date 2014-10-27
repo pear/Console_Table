@@ -45,15 +45,17 @@
  </notes>
  <contents>
   <dir baseinstalldir="Console" name="/">
-   <file baseinstalldir="Console" md5sum="5e483fb9d701327e2efcfe19d5ac99dc" name="tests/assoziative_arrays.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="c62c412db6f7dcf4518a66279ae895d6" name="tests/colors.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="6813771b8512e4b57b4c88d419ebe93d" name="tests/filters.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="db7ee7c8f65c84c6610a27227dee5c76" name="tests/multibyte.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="457d9adb43c8909cbcbba5b9c39c013f" name="tests/multiline.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="6359af11800b12a935a513b7e631b05f" name="tests/no_header.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="0f23a1c86cfb695aa6bd4b1334ab6056" name="tests/no_rows.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="cb1563335e8c2a79b28e4ef4805afb83" name="tests/rules.phpt" role="test" />
-   <file baseinstalldir="Console" md5sum="3f3cae685b4f8a8f2daea629c0098a31" name="Table.php" role="php" />
+   <dir name="tests">
+    <file name="assoziative_arrays.phpt" role="test" />
+    <file name="colors.phpt" role="test" />
+    <file name="filters.phpt" role="test" />
+    <file name="multibyte.phpt" role="test" />
+    <file name="multiline.phpt" role="test" />
+    <file name="no_header.phpt" role="test" />
+    <file name="no_rows.phpt" role="test" />
+    <file name="rules.phpt" role="test" />
+   </dir>
+   <file name="Table.php" role="php" />
   </dir>
  </contents>
  <dependencies>
