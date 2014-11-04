@@ -292,12 +292,10 @@ class Console_Table
             $intersection = '+';
             $horizontal = '-';
             $vertical = '|';
-        } else if (is_string($border)) {
-            $intersection = $horizontal = $vertical = $border;
-        } else if ($border == '') {
-            $intersection = $horizontal = $vertical = '';
-        } else {
+        } elseif (is_array($border)) {
             extract($border);
+        } else {
+            $intersection = $horizontal = $vertical = $border;
         }
 
         $this->_border = array(
