@@ -2,7 +2,7 @@
 /**
  * Utility for printing tables from commandline scripts.
  *
- * PHP versions 4 and 5
+ * PHP versions 5 and 7
  *
  * All rights reserved.
  *
@@ -191,9 +191,9 @@ class Console_Table
      *                         extension.
      * @param boolean $color   Whether the data contains ansi color codes.
      */
-    function Console_Table($align = CONSOLE_TABLE_ALIGN_LEFT,
-                           $border = CONSOLE_TABLE_BORDER_ASCII, $padding = 1,
-                           $charset = null, $color = false)
+    function __construct($align = CONSOLE_TABLE_ALIGN_LEFT,
+                         $border = CONSOLE_TABLE_BORDER_ASCII, $padding = 1,
+                         $charset = null, $color = false)
     {
         $this->_defaultAlign = $align;
         $this->setBorder($border);
