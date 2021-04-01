@@ -223,7 +223,7 @@ class Console_Table
      * @return Console_Table|string  A Console_Table object or the generated
      *                               table.
      */
-    function fromArray($headers, $data, $returnObject = false)
+    static function fromArray($headers, $data, $returnObject = false)
     {
         if (!is_array($headers) || !is_array($data)) {
             return false;
